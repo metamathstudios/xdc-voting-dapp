@@ -1,0 +1,64 @@
+.container {
+  width: 100vw;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .limitedContainer {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      cursor: pointer;
+    }
+
+    .userOptions {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+
+      .connectButton {
+        cursor: pointer;
+        padding: 10px 12px;
+        background: var(--darkblue);
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .lightMode {
+        padding: 10px 12px;
+        border-radius: 10px;
+        background-color: black;
+
+        .limitWidth {
+          max-width: 20px;
+          max-height: 20px;
+        }
+      }
+
+      .darkMode {
+        padding: 10px 12px;
+        border-radius: 10px;
+        background-color: white;
+
+        .limitWidth {
+          transform: scale(1.20);
+          max-width: 20px;
+          max-height: 20px;
+        }
+      }
+    }
+  }
+
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--lightline);
+}
