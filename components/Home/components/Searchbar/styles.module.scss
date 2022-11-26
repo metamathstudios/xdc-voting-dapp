@@ -7,10 +7,12 @@
 
   .search {
     cursor: pointer;
-    padding: 5px;
+    padding: 8px;
   }
 
   .input {
+    width: 100%;
+    
     :is(input) {
       width: 100%;
       height: 100%;

@@ -8,7 +8,9 @@ const Searchbar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.search}>
-        <Image src={search} alt='Search' />
+        <div className={styles.limitWidth}>
+          <Image src={search} alt='Search' />
+        </div>
       </div>
 
       <div className={styles.input}>
