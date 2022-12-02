@@ -1,5 +1,5 @@
-import HomeComponent from '../components/Home'
-import Navbar from '../components/Navbar'
+import HomeComponent from "../components/Home";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   return (
@@ -7,5 +7,5 @@ export default function Home() {
       <Navbar />
       <HomeComponent />
     </>
-  )
+  );
 }

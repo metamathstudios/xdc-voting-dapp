@@ -1,32 +1,31 @@
-import Image from 'next/image'
-import { useState } from 'react'
-
-import styles from './styles.module.scss'
-
-import logo from '../../public/assets/logo/votinglogo.svg'
-import moon from '../../public/assets/darkmode/moon.svg'
-import sun from '../../public/assets/lightmode/sun.svg'
+import Image from "next/image";
+import { useState } from "react";
+import moon from "../../public/assets/darkmode/moon.svg";
+import sun from "../../public/assets/lightmode/sun.svg";
+import logo from "../../public/assets/logo/votinglogo.svg";
+import styles from "./styles.module.scss";
 
 const Navbar = () => {
   //false == light | true == dark
-  const [light, setLight] = useState(false)
+  const [light, setLight] = useState(false);
 
   return (
     <>
       <div className={styles.container}>
         <div className={styles.limitedContainer}>
           <div className={styles.logo}>
-            <Image src={logo} alt='Logo' />
+            <Image src={logo} alt="Logo" />
           </div>
 
           <div className={styles.userOptions}>
-            <div className={styles.connectButton}>
-              Connect Wallet
-            </div>
+            <div className={styles.connectButton}>Connect Wallet</div>
 
-            <div className={light == false ? styles.lightMode : styles.darkMode} onClick={() => setLight(!light)}>
+            <div
+              className={light == false ? styles.lightMode : styles.darkMode}
+              onClick={() => setLight(!light)}
+            >
               <div className={styles.limitWidth}>
-                <Image src={light == false ? moon : sun} alt='Switch' />
+                <Image src={light == false ? moon : sun} alt="Switch" />
               </div>
             </div>
           </div>
@@ -35,7 +34,7 @@ const Navbar = () => {
 
       <div className={styles.line} />
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
