@@ -1,4 +1,4 @@
-import clock from "../../../../public/assets/svgicons/clock.svg";
+import clock from "../../../../public/assets/svgicons/like.svg";
 import styles from "./styles.module.scss";
 
 const Card = () => {
@@ -31,16 +31,15 @@ const Card = () => {
 
       <div className={styles.footer}>
         <div className={styles.left}>
-          <div className={styles.status}>wallet id</div>
-          <div className={styles.icon} />
+          <div className={styles.text}>Status:</div>
+          <div className={styles.status}>Active</div>
         </div>
         <div className={styles.middle}>
-          <img src={clock.src} alt="Timing" />
-          <div className={styles.timing}>04:32:18</div>
+          <div className={styles.line} />
         </div>
         <div className={styles.right}>
-          <img src={clock.src} alt="Timing" />
-          <div className={styles.timing}>04:32:18</div>
+          <img src={clock.src} alt="Vote" />
+          <div className={styles.text}>Votes: 83</div>
         </div>
       </div>
     </div>

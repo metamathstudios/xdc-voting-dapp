@@ -1,9 +1,15 @@
 .container {
   width: 100%;
-  border: 1px solid var(--lightline);
+  outline: 1.5px solid var(--lightline);
   border-radius: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
+  cursor: pointer;
+  transition: all ease-in-out 0.3s;
+
+  &:hover {
+    outline: 2px solid var(--darkblue);
+  }
 
   .header {
     width: 100%;
@@ -20,13 +26,13 @@
       .icon {
         width: 22px;
         height: 22px;
-        background: rgba(32, 73, 185, 1);
+        background: var(--darkblue);
         border-radius: 25px;
         margin-right: 5px;
       }
 
       .walletId {
-        color: rgba(72, 72, 72, 1);
+        color: var(--darkline);
         font-size: 14px;
       }
     }
@@ -41,7 +47,7 @@
       }
 
       .timing {
-        color: rgba(72, 72, 72, 1);
+        color: var(--darkline);
         font-size: 14px;
       }
     }
@@ -70,7 +76,7 @@
       margin: 5px;
       padding: 5px 15px;
       background: rgba(217, 217, 217, 1);
-      color: rgba(72, 72, 72, 1);
+      color: var(--darkline);
       border-radius: 30px;
       font-size: 15px;
     }
@@ -81,24 +87,38 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 10px 20px 5px;
 
     .left {
       display: flex;
       align-items: center;
       justify-content: center;
 
-      .icon {
-        width: 22px;
-        height: 22px;
-        background: rgba(32, 73, 185, 1);
+      .status {
+        background: var(--darkblue);
         border-radius: 25px;
-        margin-right: 5px;
+        margin-left: 5px;
+        color: white;
+        padding: 4px 15px;
+        font-size: 15px;
       }
 
-      .walletId {
-        color: rgba(72, 72, 72, 1);
-        font-size: 14px;
+      .text {
+        color: var(--lightline);
+        font-size: 15px;
+      }
+    }
+
+    .middle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .line {
+        width: 200px;
+        height: 8px;
+        background: red;
+        border-radius: 10px;
       }
     }
 
@@ -111,8 +131,8 @@
         padding-right: 5px;
       }
 
-      .timing {
-        color: rgba(72, 72, 72, 1);
+      .text {
+        color: var(--darkline);
         font-size: 14px;
       }
     }
