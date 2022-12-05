@@ -1,9 +1,9 @@
 import Head from 'next/head'
 
-import HomeComponent from '../components/Home'
 import Navbar from '../components/Navbar'
+import ProposalEditorComponent from '../components/ProposalEditor'
 
-export default function Home() {
+export default function ProposalEditor() {
   return (
     <>
       <Head>
@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
 
       <Navbar />
-      <HomeComponent />
+      <ProposalEditorComponent />
     </>
   )
 }
