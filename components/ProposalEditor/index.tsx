@@ -137,7 +137,7 @@ const ProposalEditorComponent = () => {
               </div>
 
               <div className={styles.input}>
-                <input type="text" placeholder='https://www.link.com' />
+                <input type="text" placeholder='https://www.yourlink.com' />
               </div>
             </div>
 

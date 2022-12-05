@@ -1,0 +1,8 @@
+.container {
+  width: 100%;
+  max-width: 750px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid var(--lightline);
+  border-radius: 10px;
+}
