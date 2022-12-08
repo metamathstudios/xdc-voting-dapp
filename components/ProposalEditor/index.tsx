@@ -6,6 +6,7 @@ import styles from './styles.module.scss'
 import { TagsInput } from 'react-tag-input-component'
 import { EditorState } from 'draft-js'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import Slider from '@mui/material/Slider'
 
 import back from './assets/back.svg'
 import preview from './assets/preview.svg'
@@ -18,15 +19,19 @@ const ProposalEditorComponent = () => {
     () => EditorState.createEmpty(),
   )
   function onChange (editorState: any) {
-    setEditorState({
+    setEditorState(
       editorState
-    })
+    )
   }
 
   const Editor = dynamic(
     () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
     { ssr: false }
   )
+
+  const valuetext = (value: number) => {
+    return `${value}°C`;
+  }
 
   return (
     <div className={styles.container}>
@@ -120,13 +125,32 @@ const ProposalEditorComponent = () => {
             </div>
           </div>
 
+          <div className={styles.sliderInput}>
+            <div className={styles.label}>
+              Minimum Pass Vote
+            </div>
+
+            <div className={styles.input}>
+              <Slider
+                aria-label='Voting Toll'
+                defaultValue={10}
+                getAriaValueText={valuetext}
+                valueLabelDisplay='auto'
+                step={10}
+                marks
+                min={0}
+                max={100}
+              />
+            </div>
+          </div>
+
           <div className={styles.textEditor}>
             <div className={styles.label}>
               Description
             </div>
 
             <div className={styles.input}>
-              <Editor editorState={editorState} />
+              <Editor editorState={editorState} onEditorStateChange={onChange} editorClassName={styles.editor} />
             </div>
           </div>
 

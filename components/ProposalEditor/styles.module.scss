@@ -1,8 +1,9 @@
 .container {
-  width: 100vw;
+  max-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding-bottom: 40px;
 
   .centerColumn {
     width: 800px;
@@ -75,13 +76,14 @@
     }
 
     .inputsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
 
       .inputRow {
         display: flex;
         flex-direction: row;
         gap: 20px;
-        margin-top: 20px;
-        margin-bottom: 20px;
 
         .startDate {
 
@@ -146,7 +148,6 @@
 
       .textInput {
         width: 100%;
-        margin-bottom: 15px;
 
         .label {
           margin-bottom: 10px;
@@ -166,6 +167,12 @@
         .label {
           margin-bottom: 10px;
         }
+
+        .input {
+          :is(div) {border-radius: 5px;}
+          border: 1px solid #D9D9D9;
+          border-radius: 7px;
+        }
       }
 
       .bottomInputs {
@@ -179,11 +186,12 @@
         }
 
         .textButton {
-          width: 150px;
           cursor: pointer;
+          width: 150px;
+          height: 38px;
           border: 1px solid #D9D9D9;
           border-radius: 8px;
-          margin-top: 12px;
+          margin-top: 27px;
           padding: 8px 10px 8px 10px;
           text-align: center;
           font-size: 15px;
@@ -197,11 +205,11 @@
         }
 
         .button {
+          cursor: pointer;
           min-width: 34px;
           min-height: 38px;
-          cursor: pointer;
           padding: 9px;
-          margin-top: 12px;
+          margin-top: 27px;
           border: 1px solid #D9D9D9;
           border-radius: 8px;
           transition: 0.3s;
@@ -212,6 +220,7 @@
 
             .image {
               filter: brightness(100);
+              padding-top: 13px;
             }
           }
         }
