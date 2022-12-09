@@ -10,10 +10,15 @@ const HomeComponent = () => {
     <div className={styles.container}>
       <div className={styles.centerColumn}>
         <Search />
-        <div className={styles.content}>
-          <List />
-          <About />
-          <VotersList />
+        <div className={styles.contentGrid}>
+          <div className={styles.left}>
+            <List />
+          </div>
+
+          <div className={styles.right}>
+            <About />
+            <VotersList />
+          </div>
         </div>
       </div>
     </div>
