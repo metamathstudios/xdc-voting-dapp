@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 10px;
 
   .centerColumn {
     margin-top: 30px;
@@ -16,7 +17,7 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      margin-top: 25px;
+      margin-top: 15px;
     }
   }
 }

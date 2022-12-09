@@ -1,3 +1,4 @@
+import ProgressBar from "@ramonak/react-progress-bar";
 import clock from "../../../../public/assets/svgicons/like.svg";
 import styles from "./styles.module.scss";
 
@@ -35,7 +36,13 @@ const Card = () => {
           <div className={styles.status}>Active</div>
         </div>
         <div className={styles.middle}>
-          <div className={styles.line} />
+          <ProgressBar
+            completed={90}
+            bgColor="red"
+            width="100px"
+            height="8px"
+            isLabelVisible={false}
+          />
         </div>
         <div className={styles.right}>
           <img src={clock.src} alt="Vote" />

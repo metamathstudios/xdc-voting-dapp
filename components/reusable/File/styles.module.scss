@@ -1,0 +1,17 @@
+.container {
+  max-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(217, 217, 217, 1);
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+
+  span {
+    margin-right: 10px;
+    color: rgba(188, 188, 188, 1);
+    font-size: 15px;
+  }
+}
