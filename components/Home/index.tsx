@@ -8,13 +8,18 @@ const HomeComponent = () => {
     <div className={styles.container}>
       <div className={styles.centerColumn}>
         <Search />
-        <div className={styles.content}>
-          <List />
-          <About />
+        <div className={styles.contentGrid}>
+          <div className={styles.left}>
+            <List />
+          </div>
+
+          <div className={styles.right}>
+            <About />
+          </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeComponent;
+export default HomeComponent

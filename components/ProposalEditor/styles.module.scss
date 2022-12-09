@@ -1,0 +1,230 @@
+.container {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 40px;
+
+  .centerColumn {
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+
+    .userOptions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 40px;
+
+      .backContainer {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        color: #2049B9;
+      }
+
+      .rightContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+        .preview {
+          cursor: pointer;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 5px;
+          border: solid 1px #D9D9D9;
+          padding: 10px;
+          border-radius: 8px;
+          transition: 0.3s;
+
+          &:hover {
+            color: white;
+            background: #2049B9;
+
+            .image {
+              filter: brightness(100);
+            }
+          }
+        }
+
+        .publish {
+          cursor: pointer;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 5px;
+          border: solid 1px #D9D9D9;
+          padding: 10px;
+          border-radius: 8px;
+          transition: 0.3s;
+
+          &:hover {
+            color: white;
+            background: #2049B9;
+
+            .image {
+              filter: brightness(100);
+            }
+          }
+        }
+      }
+    }
+
+    .inputsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .inputRow {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+
+        .startDate {
+
+          .label {
+            margin-bottom: 10px;
+          }
+
+          :is(input) {
+            border-radius: 10px;
+            border: 1px solid #D9D9D9;
+            padding: 10px;
+            width: 250px;
+            outline: none;
+            font-family: Recursive, sans-serif;
+          }
+        }
+
+        .endDate {
+
+          .label {
+            margin-bottom: 10px;
+          }
+
+          :is(input) {
+            border-radius: 10px;
+            border: 1px solid #D9D9D9;
+            padding: 10px;
+            width: 250px;
+            outline: none;
+            font-family: Recursive, sans-serif;
+          }
+        }
+
+        .votingToll {
+
+          .label {
+            margin-bottom: 10px;
+          }
+
+          :is(input) {
+            border-radius: 10px;
+            border: 1px solid #D9D9D9;
+            padding: 10px;
+            width: 250px;
+            outline: none;
+            font-family: Recursive, sans-serif;
+          }
+        }
+      }
+
+      .tagInput {
+
+        .label {
+          margin-bottom: 10px;
+        }
+
+        .input {
+          width: 100%;
+          outline: none;
+        }
+      }
+
+      .textInput {
+        width: 100%;
+
+        .label {
+          margin-bottom: 10px;
+        }
+
+        :is(input) {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #D9D9D9;
+          border-radius: 7px;
+          outline: none;
+        }
+      }
+
+      .textEditor {
+        
+        .label {
+          margin-bottom: 10px;
+        }
+
+        .input {
+          :is(div) {border-radius: 5px;}
+          border: 1px solid #D9D9D9;
+          border-radius: 7px;
+        }
+      }
+
+      .bottomInputs {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+
+        :is(input) {
+          font-family: Recursive, sans-serif;
+        }
+
+        .textButton {
+          cursor: pointer;
+          width: 150px;
+          height: 38px;
+          border: 1px solid #D9D9D9;
+          border-radius: 8px;
+          margin-top: 27px;
+          padding: 8px 10px 8px 10px;
+          text-align: center;
+          font-size: 15px;
+          transition: 0.3s;
+          color: #2049B9;
+
+          &:hover {
+            background: #2049B9;
+            color: white;
+          }
+        }
+
+        .button {
+          cursor: pointer;
+          min-width: 34px;
+          min-height: 38px;
+          padding: 9px;
+          margin-top: 27px;
+          border: 1px solid #D9D9D9;
+          border-radius: 8px;
+          transition: 0.3s;
+
+          &:hover {
+            background: #2049B9;
+            color: white;
+
+            .image {
+              filter: brightness(100);
+              padding-top: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
