@@ -2,7 +2,13 @@
   width: 100%;
   max-width: 750px;
   display: flex;
-  flex-direction: row;
-  border: 1px solid var(--lightline);
+  align-items: flex-start;
+  flex-direction: column;
   border-radius: 10px;
+  height: 70vh;
+  overflow-y: auto;
+
+  :first-child {
+    margin-top: 2px;
+  }
 }

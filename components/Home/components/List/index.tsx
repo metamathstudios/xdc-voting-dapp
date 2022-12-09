@@ -5,6 +5,9 @@ const List = () => {
   return (
     <div className={styles.container}>
       <Card />
+      <Card />
+      <Card />
+      <Card />
     </div>
   );
 };
