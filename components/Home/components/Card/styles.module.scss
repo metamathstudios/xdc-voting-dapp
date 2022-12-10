@@ -1,11 +1,14 @@
 .container {
-  width: 100%;
+  width: 95%;
   outline: 1.5px solid var(--lightline);
   border-radius: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-left: 2px;
+  margin-right: 10px;
   cursor: pointer;
   transition: all ease-in-out 0.3s;
+  margin-top: 20px;
 
   &:hover {
     outline: 2px solid var(--darkblue);
@@ -114,11 +117,7 @@
       align-items: center;
       justify-content: center;
 
-      .line {
-        width: 200px;
-        height: 8px;
-        background: red;
-        border-radius: 10px;
+      .loading {
       }
     }
 

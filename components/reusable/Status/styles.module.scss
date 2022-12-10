@@ -1,0 +1,14 @@
+.container {
+  max-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 16px;
+  cursor: pointer;
+
+  span {
+    color: white;
+    font-size: 15px;
+  }
+}
