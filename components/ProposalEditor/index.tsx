@@ -4,9 +4,14 @@ import dynamic from 'next/dynamic'
 import styles from './styles.module.scss'
 
 import { TagsInput } from 'react-tag-input-component'
-import { EditorState } from 'draft-js'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import '@uiw/react-md-editor/markdown-editor.css'
+import '@uiw/react-markdown-preview/markdown.css'
 import Slider from '@mui/material/Slider'
+
+const MDEditor = dynamic(
+  () => import('@uiw/react-md-editor'),
+  { ssr: false }
+)
 
 import back from './assets/back.svg'
 import preview from './assets/preview.svg'
@@ -15,22 +20,11 @@ import more from './assets/more.svg'
 
 const ProposalEditorComponent = () => {
   const [selected, setSelected] = useState(['XDC'])
-  const [editorState, setEditorState] = useState(
-    () => EditorState.createEmpty(),
-  )
-  function onChange (editorState: any) {
-    setEditorState(
-      editorState
-    )
-  }
 
-  const Editor = dynamic(
-    () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
-    { ssr: false }
-  )
+  const [value, setValue] = useState('# XDC Proposal Editor');
 
   const valuetext = (value: number) => {
-    return `${value}°C`;
+    return `${value}`
   }
 
   return (
@@ -150,7 +144,7 @@ const ProposalEditorComponent = () => {
             </div>
 
             <div className={styles.input}>
-              <Editor editorState={editorState} onEditorStateChange={onChange} editorClassName={styles.editor} />
+              <MDEditor value={value} onChange={setValue} />
             </div>
           </div>
 
