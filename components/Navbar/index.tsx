@@ -26,7 +26,7 @@ const Navbar = () => {
     <>
       <div className={styles.container}>
         <div className={styles.limitedContainer}>
-          <div className={styles.logo}>
+          <div className={styles.logo} onClick={() => window.open('/', '_self')}>
             <Image src={logo} alt="Logo" />
           </div>
 

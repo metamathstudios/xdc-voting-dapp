@@ -6,8 +6,18 @@
   flex-direction: column;
   border-radius: 10px;
   height: 70vh;
-  overflow-y: auto;
-
+  overflow: auto;
+  /* this will hide the scrollbar in mozilla based browsers */
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+  /* this will hide the scrollbar in internet explorers */
+  -ms-overflow-style: none;
+/* this will hide the scrollbar in webkit based browsers - safari, chrome, etc */
+  &::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+  }
+  
   :first-child {
     margin-top: 2px;
   }
