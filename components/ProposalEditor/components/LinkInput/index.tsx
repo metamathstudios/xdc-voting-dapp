@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 
 import more from './assets/more.svg'
 
-const LinkInput = () => {
+const LinkInput = ({handleRenderNumber}) => {
   return (
     <div className={styles.container}>
       <div className={styles.label}>
@@ -16,7 +16,7 @@ const LinkInput = () => {
           <input type="text" />
         </div>
 
-        <div className={styles.button}>
+        <div className={styles.button} onClick={handleRenderNumber}>
           <Image src={more} alt='Add' className={styles.image} />
         </div>
       </div>

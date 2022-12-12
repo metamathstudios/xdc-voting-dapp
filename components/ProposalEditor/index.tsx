@@ -7,8 +7,10 @@ import { TagsInput } from 'react-tag-input-component'
 import '@uiw/react-md-editor/markdown-editor.css'
 import '@uiw/react-markdown-preview/markdown.css'
 import Slider from '@mui/material/Slider'
+import LinkInputRemovable from './components/LinkInputRemovable'
 import LinkInput from './components/LinkInput'
 import ImageInput from './components/ImageInput'
+import ImageInputRemovable from './components/ImageInputRemovable'
 
 const MDEditor = dynamic(
   () => import('@uiw/react-md-editor'),
@@ -23,6 +25,25 @@ const ProposalEditorComponent = () => {
   const [selected, setSelected] = useState(['XDC'])
 
   const [value, setValue] = useState('# XDC Proposal Editor');
+
+  const [renderNumberLink, setRenderNumberLink] = useState(0)
+  const [renderNumberImage, setRenderNumberImage] = useState(0)
+
+  const handleRenderNumberLink = () => {
+    setRenderNumberLink(current => current + 1)
+  }
+
+  const handleRemoveNumberLink = () => {
+    setRenderNumberLink(current => current - 1)
+  }
+
+  const handleRenderNumberImage = () => {
+    setRenderNumberImage(current => current + 1)
+  }
+
+  const handleRemoveNumberImage = () => {
+    setRenderNumberImage(current => current - 1)
+  }
 
   const valuetext = (value: number) => {
     return `${value}`
@@ -145,13 +166,16 @@ const ProposalEditorComponent = () => {
             </div>
 
             <div className={styles.input} data-color-mode='light' >
-              <MDEditor value={value} onChange={setValue} height={350} />
+              <MDEditor value={value} onChange={(text) => setValue(text || '')} height={350} />
             </div>
           </div>
 
           <div className={styles.bottomInputs}>
-            <LinkInput />
-            <ImageInput />
+            <LinkInput handleRenderNumber={handleRenderNumberLink} />
+            { Array.from({length: renderNumberLink}).map((_, i) => <LinkInputRemovable key={i} handleRenderNumber={handleRemoveNumberLink} />)}
+
+            <ImageInput handleRenderNumber={handleRenderNumberImage}/>
+            { Array.from({length: renderNumberImage}).map((_, i) => <ImageInputRemovable key={i} handleRenderNumber={handleRemoveNumberImage} />)}
           </div>
         </div>
       </div>

@@ -2,13 +2,13 @@ import Image from 'next/image'
 
 import styles from './styles.module.scss'
 
-import more from './assets/more.svg'
+import less from './assets/less.svg'
 
-const ImageInput = ({handleRenderNumber}) => {
+const LinkInput = ({handleRenderNumber}) => {
   return (
     <div className={styles.container}>
       <div className={styles.label}>
-        Upload Document (Optional)
+        Link (Optional)
       </div>
 
       <div className={styles.inputContainer}>
@@ -16,16 +16,12 @@ const ImageInput = ({handleRenderNumber}) => {
           <input type="text" />
         </div>
 
-        <div className={styles.textButton}>
-          <input type='file' />Browse File
-        </div>
-
         <div className={styles.button} onClick={handleRenderNumber}>
-          <Image src={more} alt='Add' className={styles.image} />
+          <Image src={less} alt='Add' className={styles.image} />
         </div>
       </div>
     </div>
   )
 }
 
-export default ImageInput
+export default LinkInput

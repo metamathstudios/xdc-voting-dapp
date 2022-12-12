@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import styles from './styles.module.scss'
 
-import more from './assets/more.svg'
+import less from './assets/less.svg'
 
 const ImageInput = ({handleRenderNumber}) => {
   return (
@@ -21,7 +21,7 @@ const ImageInput = ({handleRenderNumber}) => {
         </div>
 
         <div className={styles.button} onClick={handleRenderNumber}>
-          <Image src={more} alt='Add' className={styles.image} />
+          <Image src={less} alt='Add' className={styles.image} />
         </div>
       </div>
     </div>
