@@ -129,7 +129,9 @@ const ProposalEditorComponent = () => {
                 <input type='date' />
               </div>
             </div>
+          </div>
 
+          <div className={styles.inputRow}>
             <div className={styles.votingToll}>
               <div className={styles.label}>
                 Voting Toll
@@ -139,24 +141,24 @@ const ProposalEditorComponent = () => {
                 <input type='number' placeholder='Min: 0 XDC Max: 100000 XDC' />
               </div>
             </div>
-          </div>
 
-          <div className={styles.sliderInput}>
-            <div className={styles.label}>
-              Minimum Pass Vote
-            </div>
+            <div className={styles.sliderInput}>
+              <div className={styles.label}>
+                Minimum Pass Vote
+              </div>
 
-            <div className={styles.input}>
-              <Slider
-                aria-label='Voting Toll'
-                defaultValue={10}
-                getAriaValueText={valuetext}
-                valueLabelDisplay='auto'
-                step={10}
-                marks
-                min={0}
-                max={100}
-              />
+              <div className={styles.input}>
+                <Slider
+                  aria-label='Voting Toll'
+                  defaultValue={10}
+                  getAriaValueText={valuetext}
+                  valueLabelDisplay='auto'
+                  step={10}
+                  marks
+                  min={0}
+                  max={100}
+                />
+              </div>
             </div>
           </div>
 
