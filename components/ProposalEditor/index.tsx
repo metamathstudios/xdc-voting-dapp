@@ -7,6 +7,8 @@ import { TagsInput } from 'react-tag-input-component'
 import '@uiw/react-md-editor/markdown-editor.css'
 import '@uiw/react-markdown-preview/markdown.css'
 import Slider from '@mui/material/Slider'
+import LinkInput from './components/LinkInput'
+import ImageInput from './components/ImageInput'
 
 const MDEditor = dynamic(
   () => import('@uiw/react-md-editor'),
@@ -16,7 +18,6 @@ const MDEditor = dynamic(
 import back from './assets/back.svg'
 import preview from './assets/preview.svg'
 import publish from './assets/publish.svg'
-import more from './assets/more.svg'
 
 const ProposalEditorComponent = () => {
   const [selected, setSelected] = useState(['XDC'])
@@ -143,45 +144,14 @@ const ProposalEditorComponent = () => {
               Description
             </div>
 
-            <div className={styles.input}>
-              <MDEditor value={value} onChange={setValue} />
+            <div className={styles.input} data-color-mode='light' >
+              <MDEditor value={value} onChange={setValue} height={350} />
             </div>
           </div>
 
           <div className={styles.bottomInputs}>
-            <div className={styles.textInput}>
-              <div className={styles.label}>
-                Link (Optional)
-              </div>
-
-              <div className={styles.input}>
-                <input type="text" placeholder='https://www.yourlink.com' />
-              </div>
-            </div>
-
-            <div className={styles.button}>
-              <Image src={more} alt='Button' width={15} className={styles.image} />
-            </div>
-          </div>
-
-          <div className={styles.bottomInputs}>
-            <div className={styles.textInput}>
-              <div className={styles.label}>
-                Upload Document (Optional)
-              </div>
-
-              <div className={styles.input}>
-                <input type='file'  placeholder='image.png' />
-              </div>
-            </div>
-
-            <div className={styles.textButton}>
-              Browse File
-            </div>
-
-            <div className={styles.button}>
-              <Image src={more} alt='Button' width={15} className={styles.image} />
-            </div>
+            <LinkInput />
+            <ImageInput />
           </div>
         </div>
       </div>

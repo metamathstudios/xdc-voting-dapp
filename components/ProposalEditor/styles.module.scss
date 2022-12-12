@@ -83,7 +83,7 @@
       .inputRow {
         display: flex;
         flex-direction: row;
-        gap: 20px;
+        gap: 25px;
 
         .startDate {
 
@@ -92,7 +92,7 @@
           }
 
           :is(input) {
-            border-radius: 10px;
+            border-radius: 5px;
             border: 1px solid #D9D9D9;
             padding: 10px;
             width: 250px;
@@ -108,7 +108,7 @@
           }
 
           :is(input) {
-            border-radius: 10px;
+            border-radius: 5px;
             border: 1px solid #D9D9D9;
             padding: 10px;
             width: 250px;
@@ -124,7 +124,7 @@
           }
 
           :is(input) {
-            border-radius: 10px;
+            border-radius: 5px;
             border: 1px solid #D9D9D9;
             padding: 10px;
             width: 250px;
@@ -142,7 +142,35 @@
 
         .input {
           width: 100%;
-          outline: none;
+
+          :is(div) {
+            outline: none;
+            border: 1px solid #D9D9D9;
+            box-shadow: none;
+            padding: 5px;
+            
+            :is(input) {
+              width: 90%;
+              font-family: Recursive, sans-serif;
+
+              &::placeholder {
+                font-size: 12px;
+                transform: translateY(-2px);
+              }
+            }
+
+            :is(span) {
+              border-radius: 20px;
+              font-size: 14px;
+              margin-left: 1px;
+              background: #D9D9D9;
+              color: #484848;
+
+              :is(button) {
+                margin-top: 2px;
+              }
+            }
+          }
         }
       }
 
@@ -176,54 +204,10 @@
       }
 
       .bottomInputs {
+        width: 100%;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 12px;
-
-        :is(input) {
-          font-family: Recursive, sans-serif;
-        }
-
-        .textButton {
-          cursor: pointer;
-          width: 150px;
-          height: 38px;
-          border: 1px solid #D9D9D9;
-          border-radius: 8px;
-          margin-top: 27px;
-          padding: 8px 10px 8px 10px;
-          text-align: center;
-          font-size: 15px;
-          transition: 0.3s;
-          color: #2049B9;
-
-          &:hover {
-            background: #2049B9;
-            color: white;
-          }
-        }
-
-        .button {
-          cursor: pointer;
-          min-width: 34px;
-          min-height: 38px;
-          padding: 9px;
-          margin-top: 27px;
-          border: 1px solid #D9D9D9;
-          border-radius: 8px;
-          transition: 0.3s;
-
-          &:hover {
-            background: #2049B9;
-            color: white;
-
-            .image {
-              filter: brightness(100);
-              padding-top: 13px;
-            }
-          }
-        }
+        flex-direction: column;
+        gap: 10px;
       }
     }
   }
