@@ -1,52 +1,117 @@
 import ProgressBar from "@ramonak/react-progress-bar";
-import clock from "../../../../public/assets/svgicons/like.svg";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import like from "../../../../public/assets/svgicons/like.svg";
+import { ellipseAddress, getPercentage } from "../../../../utils";
+import Status, { StatusType } from "../../../reusable/Status";
+import Timing from "../../../reusable/Timing";
 import styles from "./styles.module.scss";
 
-const Card = () => {
+interface CardType {
+  data: {
+    title: string;
+    tags: [string];
+    description: string;
+    contract: string;
+    id: number;
+    creator: string;
+    created: number;
+    opens: number;
+    closes: number;
+    toll: number;
+    urls: [string];
+    files: [string];
+    options: [string];
+    burnPercentage: number;
+    burnAddress: string;
+    communityPercentage: number;
+    communityAddress: string;
+  };
+}
+
+interface Votes {
+  yes: number;
+  no: number;
+  abstain: number;
+}
+
+const Card: React.FC<CardType> = (props: CardType) => {
+  const route = useRouter();
+
+  const [status, setStatus] = useState<StatusType>(StatusType.ACTIVE);
+  const [votes, setVotes] = useState<Votes>({
+    yes: 14,
+    no: 9,
+    abstain: 0,
+  });
+
+  useEffect(() => {
+    if (Date.now() > props.data.opens && Date.now() < props.data.closes) {
+      setStatus(StatusType.ACTIVE);
+    } else if (Date.now() > props.data.closes) {
+      if (votes.yes > votes.yes + votes.no + votes.abstain / 2) {
+        setStatus(StatusType.PASSED);
+      } else if (votes.yes < votes.yes + votes.no + votes.abstain / 2) {
+        setStatus(StatusType.FAILED);
+      }
+    }
+  }, []);
+
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => route.push("/proposal/" + props.data.id)}
+    >
       <div className={styles.header}>
         <div className={styles.left}>
           <div className={styles.icon} />
-          <div className={styles.walletId}>wallet id</div>
+          <div className={styles.walletId}>
+            {ellipseAddress(props.data.creator)}
+          </div>
         </div>
         <div className={styles.right}>
-          <img src={clock.src} alt="Timing" />
-          <div className={styles.timing}>04:32:18</div>
+          <Timing closes={props.data.closes} />
         </div>
       </div>
 
       <div className={styles.content}>
-        <div className={styles.title}>What is Lorem Ipsum</div>
-        <div className={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua...
-        </div>
+        <div className={styles.title}>{props.data.title}</div>
+        <div className={styles.description}>{props.data.description}</div>
       </div>
 
       <div className={styles.tagList}>
-        <div className={styles.tag}>Core</div>
-        <div className={styles.tag}>XDC Community</div>
-        <div className={styles.tag}>Urgent</div>
+        {props.data.tags.slice(0, 4).map((value, index) => {
+          return (
+            <div className={styles.tag} key={index}>
+              {props.data.tags[index]}
+            </div>
+          );
+        })}
       </div>
 
       <div className={styles.footer}>
         <div className={styles.left}>
           <div className={styles.text}>Status:</div>
-          <div className={styles.status}>Active</div>
+          <Status status={status} />
         </div>
         <div className={styles.middle}>
           <ProgressBar
-            completed={90}
-            bgColor="red"
-            width="100px"
-            height="8px"
+            completed={getPercentage(
+              votes.yes,
+              votes.yes + votes.no + votes.abstain
+            )}
+            className={styles.loading}
             isLabelVisible={false}
+            bgColor="#78D681"
+            baseBgColor="#FF6969"
+            height="8px"
           />
         </div>
         <div className={styles.right}>
-          <img src={clock.src} alt="Vote" />
-          <div className={styles.text}>Votes: 83</div>
+          <img src={like.src} alt="Vote" />
+          <div className={styles.text}>
+            Votes: {votes.yes + votes.no + votes.abstain}
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,16 @@
 import ProgressBar from "@ramonak/react-progress-bar";
+import { getPercentage } from "../../../../utils";
 import styles from "./styles.module.scss";
 
-const Results = () => {
+interface ResultsType {
+  votes: {
+    yes: number;
+    no: number;
+    abstain: number;
+  };
+}
+
+const Results: React.FC<ResultsType> = (props: ResultsType) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>Current results</div>
@@ -10,12 +19,21 @@ const Results = () => {
         <div className={styles.result}>
           <div className={styles.text}>
             <div className={styles.left}>Yes</div>
-            <div className={styles.right}>20 - 90%</div>
+            <div className={styles.right}>
+              {props.votes.yes} -{" "}
+              {getPercentage(
+                props.votes.yes,
+                props.votes.yes + props.votes.no + props.votes.abstain
+              ) + "%"}
+            </div>
           </div>
           <ProgressBar
-            completed={90}
+            completed={getPercentage(
+              props.votes.yes,
+              props.votes.yes + props.votes.no + props.votes.abstain
+            )}
             className={styles.loading}
-            bgColor="#2049B9"
+            bgColor="#78D681"
             height="8px"
             isLabelVisible={false}
           />
@@ -24,12 +42,21 @@ const Results = () => {
         <div className={styles.result}>
           <div className={styles.text}>
             <div className={styles.left}>No</div>
-            <div className={styles.right}>8 - 8%</div>
+            <div className={styles.right}>
+              {props.votes.no} -{" "}
+              {getPercentage(
+                props.votes.no,
+                props.votes.yes + props.votes.no + props.votes.abstain
+              ) + "%"}
+            </div>
           </div>
           <ProgressBar
-            completed={8}
+            completed={getPercentage(
+              props.votes.no,
+              props.votes.yes + props.votes.no + props.votes.abstain
+            )}
             className={styles.loading}
-            bgColor="#2049B9"
+            bgColor="#FF6969"
             height="8px"
             isLabelVisible={false}
           />
@@ -38,12 +65,21 @@ const Results = () => {
         <div className={styles.result}>
           <div className={styles.text}>
             <div className={styles.left}>Abstain</div>
-            <div className={styles.right}>2 - 2%</div>
+            <div className={styles.right}>
+              {props.votes.abstain} -{" "}
+              {getPercentage(
+                props.votes.abstain,
+                props.votes.yes + props.votes.no + props.votes.abstain
+              ) + "%"}
+            </div>
           </div>
           <ProgressBar
-            completed={2}
+            completed={getPercentage(
+              props.votes.abstain,
+              props.votes.yes + props.votes.no + props.votes.abstain
+            )}
             className={styles.loading}
-            bgColor="#2049B9"
+            bgColor="#5C82E8"
             height="8px"
             isLabelVisible={false}
           />

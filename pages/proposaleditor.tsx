@@ -1,7 +1,8 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import Navbar from '../components/Navbar'
-import ProposalEditorComponent from '../components/ProposalEditor'
+import Navbar from "../components/Navbar";
+import ProposalEditorComponent from "../components/ProposalEditor";
+import TermsPopup from "../components/TermsPopup";
 
 export default function ProposalEditor() {
   return (
@@ -12,7 +13,8 @@ export default function ProposalEditor() {
       </Head>
 
       <Navbar />
+      <TermsPopup />
       <ProposalEditorComponent />
     </>
-  )
+  );
 }

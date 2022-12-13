@@ -1,14 +1,23 @@
+import { useRouter } from "next/router";
 import invertedShare from "../../../../public/assets/svgicons/invertedShare.svg";
+import { ellipseAddress } from "../../../../utils";
 import styles from "./styles.module.scss";
 
-const Contract = () => {
+interface ContractType {
+  contractAddress: string;
+  link: string;
+}
+
+const Contract: React.FC<ContractType> = (props: ContractType) => {
+  const route = useRouter();
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={() => window.open(props.link)}>
       <div className={styles.left}>
         <span>Polling Contract</span>
       </div>
       <div className={styles.right}>
-        <span>OxF9u3...325f</span>
+        <span>{ellipseAddress(props.contractAddress)}</span>
         <img src={invertedShare.src} alt="Inverted Share" />
       </div>
     </div>
