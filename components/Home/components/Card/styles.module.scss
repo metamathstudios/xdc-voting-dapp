@@ -97,27 +97,22 @@
       align-items: center;
       justify-content: center;
 
-      .status {
-        background: var(--darkblue);
-        border-radius: 25px;
-        margin-left: 5px;
-        color: white;
-        padding: 4px 15px;
-        font-size: 15px;
-      }
-
       .text {
         color: var(--lightline);
         font-size: 15px;
+        margin-right: 6px;
       }
     }
 
     .middle {
+      width: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
 
       .loading {
+        width: 80%;
+        height: 8px;
       }
     }
 

@@ -1,10 +1,11 @@
 import Image from "next/image";
-import { useState, useContext, useCallback } from "react";
+import { useCallback, useContext, useState } from "react";
 import moon from "../../public/assets/darkmode/moon.svg";
 import sun from "../../public/assets/lightmode/sun.svg";
 import logo from "../../public/assets/logo/votinglogo.svg";
 import styles from "./styles.module.scss";
 
+import { PopupContext } from "../../contexts/PopupContext";
 import { Web3ModalContext } from "../../contexts/web3modal";
 import { ellipseAddress } from "../../utils";
 
@@ -13,14 +14,15 @@ const Navbar = () => {
   const [light, setLight] = useState(false);
 
   const { connect, disconnect, account } = useContext(Web3ModalContext);
+  const { setPopup } = useContext(PopupContext);
 
   const handleConnect = useCallback(() => {
     connect();
-  }, [connect])
+  }, [connect]);
 
   const handleDisconnect = useCallback(() => {
     disconnect();
-  }, [disconnect])
+  }, [disconnect]);
 
   return (
     <>
@@ -31,13 +33,18 @@ const Navbar = () => {
           </div>
 
           <div className={styles.userOptions}>
-
-            { !account ? (
-              <div className={styles.connectButton} onClick={handleConnect}>Connect Wallet</div>
+            {!account ? (
+              <div
+                className={styles.connectButton}
+                onClick={() => setPopup(true)}
+              >
+                Connect Wallet
+              </div>
             ) : (
-              <div className={styles.connectButton} onClick={handleDisconnect}>{ellipseAddress(account)}</div>
-            ) }
-            
+              <div className={styles.connectButton} onClick={handleDisconnect}>
+                {ellipseAddress(account)}
+              </div>
+            )}
 
             <div
               className={light == false ? styles.lightMode : styles.darkMode}

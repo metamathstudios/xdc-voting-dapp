@@ -1,15 +1,89 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import backArrow from "../../public/assets/svgicons/backArrow.svg";
-import clock from "../../public/assets/svgicons/clock.svg";
 import share from "../../public/assets/svgicons/share.svg";
+import { ellipseAddress } from "../../utils";
 import Status, { StatusType } from "../reusable/Status";
+import Timing from "../reusable/Timing";
 import Contract from "./components/Contract";
 import Results from "./components/Results";
 import VoteCard from "./components/VoteCard";
 import styles from "./styles.module.scss";
 
+interface Votes {
+  yes: number;
+  no: number;
+  abstain: number;
+}
+
 const ProposalComponent = () => {
   const route = useRouter();
+
+  const [data, setData] = useState<any>({});
+  const [status, setStatus] = useState<StatusType>(StatusType.ACTIVE);
+  const [votes, setVotes] = useState<Votes>({
+    yes: 14,
+    no: 9,
+    abstain: 10,
+  });
+
+  useEffect(() => {
+    const date = new Date(1670896086 * 1000);
+
+    var months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    setData({
+      title: "The title of the page",
+      tags: ["Core", "Treasury", "Urgent", "XDC Community"],
+      description:
+        "The description of the page \n\n This is a new line \n\n This is another new line",
+      contract: "0x514910771af9ca656af840dff83e8264ecf986ca",
+      id: 1,
+      creator: "0x514910771af9ca656af840dff83e8264ecf986ca",
+      created: 1670896086,
+      opens: 1670896086,
+      closes: 1670889353,
+      toll: 10,
+      urls: ["www.link.com", "www.link.com", "www.link.com"],
+      files: ["www.link.com", "www.link.com", "www.link.com"],
+      options: ["Yes", "No", "Abstain"],
+      burnPercentage: 0.5,
+      burnAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
+      communityPercentage: 0.5,
+      communityAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
+      postedOn:
+        date.getDate() +
+        " - " +
+        months[date.getMonth()] +
+        " " +
+        date.getFullYear(),
+    });
+  }, []);
+
+  useEffect(() => {
+    if (Date.now() > data.opens && Date.now() < data.closes) {
+      setStatus(StatusType.ACTIVE);
+    } else if (Date.now() > data.closes) {
+      if (votes.yes > (votes.yes + votes.no + votes.abstain) / 2) {
+        setStatus(StatusType.PASSED);
+      } else if (votes.yes < (votes.yes + votes.no + votes.abstain) / 2) {
+        setStatus(StatusType.FAILED);
+      }
+    }
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -31,25 +105,33 @@ const ProposalComponent = () => {
               <div className={styles.top}>
                 <div className={styles.left}>
                   <div className={styles.icon} />
-                  <div className={styles.walletId}>wallet id</div>
-                  <div className={styles.postDate}>Posted on 2 - July 2022</div>
+                  <div className={styles.walletId}>
+                    {ellipseAddress(data.creator)}
+                  </div>
+                  <div className={styles.postDate}>
+                    Posted on {data.postedOn}
+                  </div>
                 </div>
                 <div className={styles.right}>
-                  <img src={clock.src} alt="Timing" />
-                  <div className={styles.timing}>23:59:59</div>
+                  <Timing closes={data.closes} />
                 </div>
               </div>
 
-              <div className={styles.title}>What is Lorem Ipsum?</div>
+              <div className={styles.title}>{data.title}</div>
 
               <div className={styles.footer}>
                 <div className={styles.left}>
-                  <Status status={StatusType.ACTIVE} />
+                  <Status status={status} />
 
                   <div className={styles.tagList}>
-                    <div className={styles.tag}>Core</div>
-                    <div className={styles.tag}>XDC Community</div>
-                    <div className={styles.tag}>Urgent</div>
+                    {data.tags &&
+                      data.tags.slice(0, 4).map((value, index) => {
+                        return (
+                          <div className={styles.tag} key={index}>
+                            {data.tags[index]}
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
                 <div className={styles.right}>
@@ -62,55 +144,17 @@ const ProposalComponent = () => {
             </div>
 
             <div className={styles.infos}>
-              <div className={styles.text}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                <br />
-                <br />
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi
-                nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur, adipisci velit, sed quia non numquam eius
-                modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                voluptatem. Ut enim ad minima veniam, quis nostrum
-                exercitationem ullam corporis suscipit laboriosam, nisi ut
-                aliquid ex ea commodi consequatur? Quis autem vel eum iure
-                reprehenderit qui in ea voluptate velit esse quam nihil
-                molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                voluptas nulla pariatur? Sed ut perspiciatis unde omnis iste
-                natus error sit voluptatem accusantium doloremque laudantium,
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis
-                et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-                ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit
-                <br />
-                <br />
-                sed quia consequuntur magni dolores eos qui ratione voluptatem
-                sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                dolor sit amet, consectetur, adipisci velit, sed quia non
-                numquam eius modi tempora incidunt ut labore et dolore magnam
-                aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-                nostrum exercitationem ullam corporis suscipit laboriosam, nisi
-                ut aliquid ex ea commodi consequatur? Quis autem vel eum iure
-                reprehenderit qui in ea voluptate velit esse quam nihil
-                molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                voluptas nulla pariatur?
-              </div>
+              <div className={styles.text}>{data.description}</div>
             </div>
           </div>
 
           <div className={styles.sides}>
             <VoteCard />
-            <Results />
-            <Contract />
+            <Results votes={votes} />
+            <Contract
+              contractAddress={data.contract}
+              link="https://google.com"
+            />
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import HomeComponent from "../components/Home";
 import Navbar from "../components/Navbar";
-import Web3ModalProvider from "../contexts/web3modal";
+import TermsPopup from "../components/TermsPopup";
 
 export default function Home() {
   return (
@@ -12,10 +12,9 @@ export default function Home() {
         <meta charSet="utf-8" />
       </Head>
 
-      <Web3ModalProvider>
-        <Navbar />
-        <HomeComponent />
-      </Web3ModalProvider>
+      <Navbar />
+      <TermsPopup />
+      <HomeComponent />
     </>
   );
 }

@@ -1,4 +1,4 @@
-.container {
+.listContainer {
   width: 100%;
   max-width: 750px;
   display: flex;
@@ -7,8 +7,10 @@
   border-radius: 10px;
   height: 70vh;
   overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-  :first-child {
-    margin-top: 2px;
-  }
+.listContainer::-webkit-scrollbar {
+  display: none;
 }
