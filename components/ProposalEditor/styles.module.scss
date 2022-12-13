@@ -39,7 +39,7 @@
           gap: 5px;
           border: solid 1px #D9D9D9;
           padding: 10px;
-          border-radius: 8px;
+          border-radius: 7px;
           transition: 0.3s;
 
           &:hover {
@@ -60,8 +60,12 @@
           gap: 5px;
           border: solid 1px #D9D9D9;
           padding: 10px;
-          border-radius: 8px;
+          border-radius: 7px;
           transition: 0.3s;
+
+          .image {
+            transform: translateY(1px);
+          }
 
           &:hover {
             color: white;
@@ -83,7 +87,7 @@
       .inputRow {
         display: flex;
         flex-direction: row;
-        gap: 20px;
+        gap: 25px;
 
         .startDate {
 
@@ -92,10 +96,10 @@
           }
 
           :is(input) {
-            border-radius: 10px;
+            border-radius: 7px;
             border: 1px solid #D9D9D9;
             padding: 10px;
-            width: 250px;
+            width: 387px;
             outline: none;
             font-family: Recursive, sans-serif;
           }
@@ -108,12 +112,20 @@
           }
 
           :is(input) {
-            border-radius: 10px;
+            border-radius: 7px;
             border: 1px solid #D9D9D9;
             padding: 10px;
-            width: 250px;
+            width: 387px;
             outline: none;
             font-family: Recursive, sans-serif;
+          }
+        }
+
+        .sliderInput {
+          width: 387px;
+          
+          .input {
+            margin-top: 13px;
           }
         }
 
@@ -124,10 +136,10 @@
           }
 
           :is(input) {
-            border-radius: 10px;
+            border-radius: 7px;
             border: 1px solid #D9D9D9;
             padding: 10px;
-            width: 250px;
+            width: 387px;
             outline: none;
             font-family: Recursive, sans-serif;
           }
@@ -135,14 +147,73 @@
       }
 
       .tagInput {
+        display: flex;
+        flex-direction: column;
 
         .label {
-          margin-bottom: 10px;
+          padding-bottom: 10px;
         }
 
         .input {
           width: 100%;
-          outline: none;
+          height: 38px;
+          display: flex;
+          flex-direction: row;
+          border: 1px solid #D9D9D9;
+          border-radius: 7px;
+
+          .tagContainer {
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 7px;
+            padding: 10px;
+            gap: 5px;
+            background: #D9D9D9;
+            border-radius: 20px;
+            color: #484848;
+            font-size: 14px;
+            z-index: 2;
+
+            .image {
+              padding-bottom: 7px;
+            }
+          }
+        }
+
+        .dropdown {
+          width: 100%;
+          height: 38px;
+          margin: 5px 0px 0px -5px;
+          display: flex;
+          flex-direction: row;
+          border-radius: 7px;
+
+          .tagContainer {
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 7px;
+            padding: 10px;
+            gap: 5px;
+            background: #D9D9D9;
+            border-radius: 20px;
+            color: #484848;
+            font-size: 14px;
+            transition: 0.3s;
+            z-index: 2;
+
+            &:hover {
+              background: #484848;
+              color: white;
+
+              .image {
+                filter: brightness(100);
+              }
+            }
+          }
         }
       }
 
@@ -169,61 +240,17 @@
         }
 
         .input {
-          :is(div) {border-radius: 5px;}
+          :is(div) {border-radius: 7px;}
           border: 1px solid #D9D9D9;
           border-radius: 7px;
         }
       }
 
       .bottomInputs {
+        width: 100%;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 12px;
-
-        :is(input) {
-          font-family: Recursive, sans-serif;
-        }
-
-        .textButton {
-          cursor: pointer;
-          width: 150px;
-          height: 38px;
-          border: 1px solid #D9D9D9;
-          border-radius: 8px;
-          margin-top: 27px;
-          padding: 8px 10px 8px 10px;
-          text-align: center;
-          font-size: 15px;
-          transition: 0.3s;
-          color: #2049B9;
-
-          &:hover {
-            background: #2049B9;
-            color: white;
-          }
-        }
-
-        .button {
-          cursor: pointer;
-          min-width: 34px;
-          min-height: 38px;
-          padding: 9px;
-          margin-top: 27px;
-          border: 1px solid #D9D9D9;
-          border-radius: 8px;
-          transition: 0.3s;
-
-          &:hover {
-            background: #2049B9;
-            color: white;
-
-            .image {
-              filter: brightness(100);
-              padding-top: 13px;
-            }
-          }
-        }
+        flex-direction: column;
+        gap: 10px;
       }
     }
   }
