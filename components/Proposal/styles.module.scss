@@ -3,35 +3,78 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 10px;
+  padding-bottom: 40px;
 
   .centerColumn {
-    margin-top: 30px;
+    width: 1100px;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 1100px;
-    height: 100%;
 
-    .actions {
+    .userOptions {
       display: flex;
-      align-items: center;
-      justify-content: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 40px;
 
-      .back {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .backContainer {
         cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        color: #2049B9;
+      }
 
-        span {
-          color: rgba(32, 73, 185, 1);
-          font-size: 14px;
+      .rightContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+        .edit {
+          cursor: pointer;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 5px;
+          border: solid 1px #D9D9D9;
+          padding: 10px;
+          border-radius: 7px;
+          transition: 0.3s;
+
+          &:hover {
+            color: white;
+            background: #2049B9;
+
+            .image {
+              filter: brightness(100);
+            }
+          }
         }
 
-        img {
-          margin-right: 5px;
-          width: 15px;
+        .publish {
+          cursor: pointer;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 5px;
+          border: solid 1px #D9D9D9;
+          padding: 10px;
+          border-radius: 7px;
+          transition: 0.3s;
+
+          .image {
+            transform: translateY(1px);
+          }
+
+          &:hover {
+            color: white;
+            background: #2049B9;
+
+            .image {
+              filter: brightness(100);
+            }
+          }
         }
       }
     }

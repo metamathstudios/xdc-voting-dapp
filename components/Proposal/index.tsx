@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import backArrow from "../../public/assets/svgicons/backArrow.svg";
 import share from "../../public/assets/svgicons/share.svg";
 import { ellipseAddress } from "../../utils";
 import Status, { StatusType } from "../reusable/Status";
@@ -9,6 +8,10 @@ import VotersList from "../VotersList";
 import Contract from "./components/Contract";
 import Results from "./components/Results";
 import VoteCard from "./components/VoteCard";
+import Image from "next/image";
+import back from '../../public/assets/svgicons/backArrow.svg';
+import edit from '../../public/assets/svgicons/edit.svg';
+import publish from '../../public/assets/svgicons/publish.svg';
 import styles from "./styles.module.scss";
 
 interface Votes {
@@ -126,16 +129,33 @@ const ProposalComponent = () => {
   return (
     <div className={styles.container}>
       <div className={styles.centerColumn}>
-        <div className={styles.actions}>
+        <div className={styles.userOptions}>
           <div
-            className={styles.back}
-            onClick={() => {
-              route.push("/");
-            }}
+            className={styles.backContainer}
+            onClick={() => route.push('/')}
           >
-            <img src={backArrow.src} alt="Timing" />
-            <span>Back</span>
+            <Image src={back} alt='Back' width={17} />
+            <div className={styles.text}>Back</div>
           </div>
+          {route.pathname === "/preview" ? (
+            <div className={styles.rightContainer} >
+              <div className={styles.edit} onClick={() => route.push("/editor")}>
+                <div className={styles.image}>
+                  <Image src={edit} alt='Edit' />
+                </div>
+
+                <div className={styles.text}>Edit</div>
+              </div>
+
+              <div className={styles.publish}>
+                <div className={styles.image}>
+                  <Image src={publish} alt='Publish' width={16} />
+                </div>
+
+                <div className={styles.text}>Publish</div>
+              </div>
+            </div>
+          ) : (<></>)}
         </div>
         <div className={styles.wrapper}>
           <div className={styles.content}>
