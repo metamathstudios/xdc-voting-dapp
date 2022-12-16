@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
@@ -20,6 +21,7 @@ import less from './assets/less.svg'
 import more from './assets/more.svg'
 
 const ProposalEditorComponent = () => {
+  const route = useRouter()
   const [value, setValue] = useState('# XDC Proposal Editor')
   const [renderNumberLink, setRenderNumberLink] = useState(0)
   const [renderNumberImage, setRenderNumberImage] = useState(0)
@@ -63,14 +65,14 @@ const ProposalEditorComponent = () => {
         <div className={styles.userOptions}>
           <div
             className={styles.backContainer}
-            onClick={() => window.open('/', '_self')}
+            onClick={() => route.push('/')}
           >
             <Image src={back} alt='Back' width={17} />
             <div className={styles.text}>Back</div>
           </div>
 
-          <div className={styles.rightContainer}>
-            <div className={styles.preview}>
+          <div className={styles.rightContainer} >
+            <div className={styles.preview} onClick={() => route.push("/preview")}>
               <div className={styles.image}>
                 <Image src={preview} alt='Preview' />
               </div>

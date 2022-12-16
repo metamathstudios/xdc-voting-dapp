@@ -5,6 +5,7 @@ import share from "../../public/assets/svgicons/share.svg";
 import { ellipseAddress } from "../../utils";
 import Status, { StatusType } from "../reusable/Status";
 import Timing from "../reusable/Timing";
+import VotersList from "../VotersList";
 import Contract from "./components/Contract";
 import Results from "./components/Results";
 import VoteCard from "./components/VoteCard";
@@ -49,7 +50,44 @@ const ProposalComponent = () => {
       title: "The title of the page",
       tags: ["Core", "Treasury", "Urgent", "XDC Community"],
       description:
-        "The description of the page \n\n This is a new line \n\n This is another new line",
+        `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim veniam, quis nostrud exercitation ullamco laboris
+        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+        reprehenderit in voluptate velit esse cillum dolore eu fugiat
+        nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+        sunt in culpa qui officia deserunt mollit anim id est laborum.
+        \n \n
+        \n \n
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+        quae ab illo inventore veritatis et quasi architecto beatae vitae
+        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+        aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+        eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
+        est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+        velit, sed quia non numquam eius modi tempora incidunt ut labore
+        et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
+        veniam, quis nostrum exercitationem ullam corporis suscipit
+        laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem
+        vel eum iure reprehenderit qui in ea voluptate velit esse quam
+        nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur? Sed ut perspiciatis unde omnis iste natus
+        error sit voluptatem accusantium doloremque laudantium, totam rem
+        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+        voluptatem quia voluptas sit aspernatur aut odit aut fugit
+        \n \n
+        \n \n
+        sed quia consequuntur magni dolores eos qui ratione voluptatem
+        sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
+        dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam
+        quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
+        ex ea commodi consequatur? Quis autem vel eum iure reprehenderit
+        qui in ea voluptate velit esse quam nihil molestiae consequatur,
+        vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`,
       contract: "0x514910771af9ca656af840dff83e8264ecf986ca",
       id: 1,
       creator: "0x514910771af9ca656af840dff83e8264ecf986ca",
@@ -151,6 +189,7 @@ const ProposalComponent = () => {
           <div className={styles.sides}>
             <VoteCard />
             <Results votes={votes} />
+            <VotersList />
             <Contract
               contractAddress={data.contract}
               link="https://google.com"

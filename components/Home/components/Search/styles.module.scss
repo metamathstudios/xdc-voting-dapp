@@ -2,12 +2,19 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  border: 1px solid var(--lightline);
-  border-radius: 10px;
+  align-items: center;
+  
+  .bordered{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1.5px solid var(--lightline);
+    border-radius: 10px;
+  }
 
   .search {
     cursor: pointer;
-    padding: 8px;
+    padding: 8.5px;
   }
 
   .input {
@@ -23,6 +30,17 @@
       &::placeholder {
         color: var(--lightline);
         font-family: Recursive, sans-serif;
+      }
+    }
+  }
+
+  .new {
+    &:hover {
+      color: white;
+      background: #2049B9;
+
+      .image {
+        filter: brightness(100);
       }
     }
   }

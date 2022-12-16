@@ -1,5 +1,5 @@
 .container {
-  max-width: 120px;
+  max-width: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,10 +8,17 @@
   border-radius: 10px;
   cursor: pointer;
   margin: 10px;
+  margin-right: 0px;
 
   span {
     margin-left: 7px;
     color: rgba(32, 73, 185, 1);
     font-size: 15px;
+  }
+
+  &:hover {
+    background-color: white;
+    outline: 1px solid var(--darkblue);
+    color: var(--darkblue);
   }
 }

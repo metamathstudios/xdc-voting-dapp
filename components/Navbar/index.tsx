@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useCallback, useContext, useState } from "react";
 import moon from "../../public/assets/darkmode/moon.svg";
 import sun from "../../public/assets/lightmode/sun.svg";
@@ -12,6 +13,7 @@ import { ellipseAddress } from "../../utils";
 const Navbar = () => {
   //false == light | true == dark
   const [light, setLight] = useState(false);
+  const route = useRouter();
 
   const { connect, disconnect, account } = useContext(Web3ModalContext);
   const { setPopup } = useContext(PopupContext);
@@ -28,7 +30,7 @@ const Navbar = () => {
     <>
       <div className={styles.container}>
         <div className={styles.limitedContainer}>
-          <div className={styles.logo} onClick={() => window.open('/', '_self')}>
+          <div className={styles.logo} onClick={() => route.push('/')}>
             <Image src={logo} alt="Logo" />
           </div>
 

@@ -5,17 +5,23 @@ import publish from "../../public/assets/svgicons/publish.svg";
 import share from "../../public/assets/svgicons/share.svg";
 import Button from "../reusable/Button";
 import File from "../reusable/File";
+import { useRouter } from "next/router";
 import styles from "./styles.module.scss";
 
 const PreviewComponent = () => {
+  const route = useRouter();
   return (
     <div className={styles.container}>
       <div className={styles.centerColumn}>
         <div className={styles.actions}>
-          <Button icon={edit} text="Edit" />
+          <div onClick={() => route.push('/editor')}>
+          <Button icon={edit} text="Edit"/>
+          </div>
+          <div>
           <Button icon={publish} text="Publish" />
+          </div>
         </div>
-        <div className={styles.content}>
+        {/* <div className={styles.content}>
           <div className={styles.header}>
             <div className={styles.top}>
               <div className={styles.left}>
@@ -93,7 +99,7 @@ const PreviewComponent = () => {
               <File name="file.png" />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
