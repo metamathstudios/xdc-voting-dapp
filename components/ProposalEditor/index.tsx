@@ -215,7 +215,7 @@ const ProposalEditorComponent = () => {
             </div>
 
             <div className={styles.sliderInput}>
-              <div className={styles.label}>Minimum Pass Vote</div>
+              <div className={styles.label}>Approval Threshold</div>
 
               <div className={styles.input}>
                 <Slider
