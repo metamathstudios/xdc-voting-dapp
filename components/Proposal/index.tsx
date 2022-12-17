@@ -30,24 +30,9 @@ const ProposalComponent = () => {
     no: 9,
     abstain: 10,
   });
+  const [postedOn, setPostedOn] = useState<string>("");
 
   useEffect(() => {
-    const date = new Date(1670896086 * 1000);
-
-    var months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
 
     setData({
       title: "The title of the page",
@@ -105,14 +90,38 @@ const ProposalComponent = () => {
       burnAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
       communityPercentage: 0.5,
       communityAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
-      postedOn:
-        date.getDate() +
-        " - " +
-        months[date.getMonth()] +
-        " " +
-        date.getFullYear(),
     });
+
   }, []);
+
+  useEffect(() => {
+
+    var months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const date = new Date(data.created * 1000);
+
+    setPostedOn(
+      date.getDate() +
+      " - " +
+      months[date.getMonth()] +
+      " " +
+      date.getFullYear()
+    );
+
+  }, [data]);
 
   useEffect(() => {
     if (Date.now() > data.opens && Date.now() < data.closes) {
@@ -167,7 +176,7 @@ const ProposalComponent = () => {
                     {ellipseAddress(data.creator)}
                   </div>
                   <div className={styles.postDate}>
-                    Posted on {data.postedOn}
+                    Posted on {postedOn}
                   </div>
                 </div>
                 <div className={styles.right}>

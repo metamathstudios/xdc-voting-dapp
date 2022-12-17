@@ -15,12 +15,8 @@ const Navbar = () => {
   const [light, setLight] = useState(false);
   const route = useRouter();
 
-  const { connect, disconnect, account } = useContext(Web3ModalContext);
+  const { disconnect, account } = useContext(Web3ModalContext);
   const { setPopup } = useContext(PopupContext);
-
-  const handleConnect = useCallback(() => {
-    connect();
-  }, [connect]);
 
   const handleDisconnect = useCallback(() => {
     disconnect();
