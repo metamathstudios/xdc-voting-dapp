@@ -36,7 +36,7 @@ const ProposalComponent = () => {
 
     setData({
       title: "The title of the page",
-      tags: ["Core", "Treasury", "Urgent", "XDC Community"],
+      tags: ["CORE", "TREASURY", "URGENT", "XDC_COMMUNITY"],
       description:
         `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -85,7 +85,7 @@ const ProposalComponent = () => {
       toll: 10,
       urls: ["www.link.com", "www.link.com", "www.link.com"],
       files: ["www.link.com", "www.link.com", "www.link.com"],
-      options: ["Yes", "No", "Abstain"],
+      options: ["YES", "NO", "ABSTAIN"],
       burnPercentage: 0.5,
       burnAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
       communityPercentage: 0.5,

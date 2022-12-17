@@ -29,11 +29,11 @@ const About = () => {
       <div className={styles.footer}>
         <div className={styles.social}>
           {/* <img src={Instagram.src} alt="Icon" width={25} height={25} /> */}
-          <img src={Discord.src} alt="Icon" width={25} height={25} />
-          <img src={Twitter.src} alt="Icon" width={25} height={25} />
+          <span onClick={() => window.open("https://discord.gg/3BhJPFykAg")}><img src={Discord.src} alt="Icon" width={25} height={25} /></span> 
+          <span onClick={() => window.open("https://twitter.com/xdc_community")}><img src={Twitter.src} alt="Icon" width={25} height={25} /></span>
         </div>
         <div className={styles.logo}>
-          <img src={Logo.src} alt="Icon" />
+          <span onClick={() => window.open("https://docs.xdc.community/")}><img src={Logo.src} alt="Icon" /></span>
         </div>
       </div>
     </div>
