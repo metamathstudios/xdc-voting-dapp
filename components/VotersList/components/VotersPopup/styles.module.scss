@@ -7,80 +7,86 @@
   background: rgba(0, 0, 0, 0.592);
   overflow: hidden;
 
-  .popupContainer {
+  .centralizePopup {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 520px;
-    height: 550px;
-    background-color: white;
-    transform: translateX(100%) translateY(20%);
-    opacity: 1.0;
-    border-radius: 12px;
-    padding: 15px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-    .closeContainer {
+    .popupContainer {
       display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      padding-bottom: 15px;
-    }
-
-    .votersContainer {
-      display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
-      padding: 0px 10px 10px 10px;
-      color: #BCBCBC;
-      font-size: 15px;
+      width: 520px;
+      height: 550px;
+      background-color: white;
+      opacity: 1.0;
+      border-radius: 12px;
+      padding: 15px;
 
-      :is(span) {
-        color: black;
-        font-weight: 500;
-      }
-    }
-
-    .dataContainer {
-      border: 1px solid var(--lightline);
-      border-radius: 10px;
-      padding: 0px 6px 2px 5px;
-      margin-top: -5px;
-    }
-    
-    .list {
-      width: calc(100% - 50px);
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-
-      :is(ul) {
+      .closeContainer {
         display: flex;
-        gap: 10px;
-        list-style-type: none;
-        color: white;
-        font-size: 14px;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-bottom: 15px;
+      }
+
+      .votersContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0px 10px 10px 10px;
+        color: #BCBCBC;
+        font-size: 15px;
+
+        :is(span) {
+          color: black;
+          font-weight: 500;
+        }
+      }
+
+      .dataContainer {
+        border: 1px solid var(--lightline);
+        border-radius: 10px;
+        padding: 0px 6px 2px 5px;
+        margin-top: -5px;
       }
       
-      .activeButton {
-        cursor: pointer;
-        width: 25px;
-        height: 25px;
-        padding-top: 4px;
-        background-color: #2049B9;
-        border-radius: 5px;
-        text-align: center;
-      }
+      .list {
+        width: calc(100% - 50px);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
 
-      .disabledButton {
-        cursor: pointer;
-        width: 25px;
-        height: 25px;
-        padding-top: 4px;
-        outline: 1px solid #BCBCBC;
-        border-radius: 5px;
-        color: #BCBCBC;
-        text-align: center;
-        pointer-events: visibleFill;
+        :is(ul) {
+          display: flex;
+          gap: 10px;
+          list-style-type: none;
+          color: white;
+          font-size: 14px;
+        }
+        
+        .activeButton {
+          cursor: pointer;
+          width: 25px;
+          height: 25px;
+          padding-top: 4px;
+          background-color: #2049B9;
+          border-radius: 5px;
+          text-align: center;
+        }
+
+        .disabledButton {
+          cursor: pointer;
+          width: 25px;
+          height: 25px;
+          padding-top: 4px;
+          outline: 1px solid #BCBCBC;
+          border-radius: 5px;
+          color: #BCBCBC;
+          text-align: center;
+          pointer-events: visibleFill;
+        }
       }
     }
   }

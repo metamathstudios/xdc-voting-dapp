@@ -21,13 +21,14 @@
 
       .left {
         width: 780px;
+        margin-top: -19px;
       }
 
       .right {
         display: flex;
         flex-direction: column;
         gap: 30px;
-        width: 320px;
+        width: 350px;
       }
     }
   }

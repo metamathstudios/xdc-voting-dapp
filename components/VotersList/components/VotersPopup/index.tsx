@@ -25,51 +25,53 @@ const VotersPopup = ({limit, total, offset, setOffset, activePopup, setActivePop
 
   return (
     <div className={styles.container}>
-      <div className={styles.popupContainer}>
-        <div className={styles.closeContainer}>
-          <Image src={close} alt='Close' onClick={() => setActivePopup(false)} style={{cursor: 'pointer'}}/>
-        </div>
-
-        <div className={styles.votersContainer}>
-          <span>
-            Voters
-          </span>
-
-          <div>
-            {30} Votes
+      <div className={styles.centralizePopup}>
+        <div className={styles.popupContainer}>
+          <div className={styles.closeContainer}>
+            <Image src={close} alt='Close' onClick={() => setActivePopup(false)} style={{cursor: 'pointer'}}/>
           </div>
-        </div>
 
-        <div className={styles.dataContainer}>
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-          <UserRow date='08 hours' name='jaumdarkz.xdc' />
-        </div>
-        
-        <div className={styles.list}>
-          <ul>
-            {Array.from({ length: Math.min(maxItems, pages)})
-            .map((_, index) => index + first)
-            .map((page) => (
-              <li key={page}>
-                <div onClick={() => setOffset((page - 1) * limit)} className={page === current ? styles.activeButton : styles.disabledButton}>
-                  {page}
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div className={styles.votersContainer}>
+            <span>
+              Voters
+            </span>
+
+            <div>
+              {30} Votes
+            </div>
+          </div>
+
+          <div className={styles.dataContainer}>
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+            <UserRow date='08 hours' name='jaumdarkz.xdc' />
+          </div>
+          
+          <div className={styles.list}>
+            <ul>
+              {Array.from({ length: Math.min(maxItems, pages)})
+              .map((_, index) => index + first)
+              .map((page) => (
+                <li key={page}>
+                  <div onClick={() => setOffset((page - 1) * limit)} className={page === current ? styles.activeButton : styles.disabledButton}>
+                    {page}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
