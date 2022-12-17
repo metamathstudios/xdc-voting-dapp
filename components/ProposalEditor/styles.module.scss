@@ -247,7 +247,8 @@
       }
 
       .bottomInputs {
-        width: 100%;
+        align-self: center;
+        width: 800px;
         display: flex;
         flex-direction: column;
         gap: 10px;
