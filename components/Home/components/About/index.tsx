@@ -28,7 +28,7 @@ const About = () => {
 
       <div className={styles.footer}>
         <div className={styles.social}>
-          <img src={Instagram.src} alt="Icon" width={25} height={25} />
+          {/* <img src={Instagram.src} alt="Icon" width={25} height={25} /> */}
           <img src={Discord.src} alt="Icon" width={25} height={25} />
           <img src={Twitter.src} alt="Icon" width={25} height={25} />
         </div>
