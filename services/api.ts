@@ -1,4 +1,5 @@
 import axios from 'axios';
+const { API_URL } = require('./url.json');
 
 export type Tag = "CORE" | "TREASURY" | "URGENT" | "XDC_COMMUNITY"
 
@@ -28,7 +29,7 @@ export type Proposal = {
 export const createProposal = async (proposal: Proposal) => {
     const config = {
         method: 'post',
-        url: `${process.env.API_URL}/proposal`,
+        url: `${API_URL}/proposal`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ export const createProposal = async (proposal: Proposal) => {
 export const getAllProposals = async () => {
     const config = {
         method: 'get',
-        url: `${process.env.API_URL}/proposal/all`,
+        url: `${API_URL}/proposal/all`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -67,7 +68,7 @@ export const getAllProposals = async () => {
 export const getProposal = async (id: number) => {
     const config = {
         method: 'get',
-        url: `${process.env.API_URL}/proposal/id/${id}`,
+        url: `${API_URL}/proposal/id/${id}`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -86,7 +87,7 @@ export const getProposal = async (id: number) => {
 export const fullTextSearch = async (query: string) => {
     const config = {
         method: 'get',
-        url: `${process.env.API_URL}/proposal/search/${query}`,
+        url: `${API_URL}/proposal/search/${query}`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',

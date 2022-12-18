@@ -1,18 +1,20 @@
 /** @type {import('next').NextConfig} */
 
-require('dotenv').config();
-
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 }
 
-module.exports = {
-    nextConfig,
-    env: {
-        API_URL: process.env.API_URL,
-    },
-}
+module.exports = nextConfig
 
-/* const removeImports = require('next-remove-imports')()
-module.exports = removeImports({}) */
+const removeImports = require('next-remove-imports')(
+  {
+  test: /node_modules([\s\S]*?)\.(tsx|ts|js|mjs|jsx)$/,
+  matchImports: "\\.(less|css|scss|sass|styl)$"
+  })
+
+module.exports = removeImports({
+  webpack(config, options) {
+    return config
+  },
+});
