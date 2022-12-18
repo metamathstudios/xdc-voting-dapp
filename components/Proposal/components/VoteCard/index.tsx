@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
+import { generateHexString } from "../../../../utils";
 
 const VoteCard = () => {
   const [votedWith, setVotedWith] = useState("");
