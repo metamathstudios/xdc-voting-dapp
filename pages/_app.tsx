@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
-import { PopupContext } from "../contexts/popupContext";
+import { PopupContext } from "../contexts/PopupContext";
 import { Theme, ThemeContext } from "../contexts/themeContext";
 import Web3ModalProvider from "../contexts/web3modal";
 import "../styles/globals.scss";
