@@ -1,27 +1,30 @@
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { useContext, useEffect, useState } from "react";
+import styles from "./styles.module.scss";
+
 import Slider from "@mui/material/Slider";
 import "@uiw/react-markdown-preview/markdown.css";
 import "@uiw/react-md-editor/markdown-editor.css";
-import dynamic from "next/dynamic";
-import Image from "next/image";
+import ImageInput from "./components/ImageInput";
+import ImageInputRemovable from "./components/ImageInputRemovable";
+import LinkInput from "./components/LinkInput";
+import LinkInputRemovable from "./components/LinkInputRemovable";
+
+const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
+
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
 import { Theme, ThemeContext } from "../../contexts/themeContext";
 import back from "./assets/back.svg";
 import less from "./assets/less.svg";
 import more from "./assets/more.svg";
 import preview from "./assets/preview.svg";
 import publish from "./assets/publish.svg";
-import ImageInput from "./components/ImageInput";
-import ImageInputRemovable from "./components/ImageInputRemovable";
-import LinkInput from "./components/LinkInput";
-import LinkInputRemovable from "./components/LinkInputRemovable";
-import styles from "./styles.module.scss";
-const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
 const ProposalEditorComponent = () => {
-  const router = useRouter();
-
   const { theme } = useContext(ThemeContext);
+
+  const router = useRouter();
 
   const [value, setValue] = useState("# XDC Proposal Editor");
   const [renderNumberLink, setRenderNumberLink] = useState(0);
@@ -274,8 +277,8 @@ const ProposalEditorComponent = () => {
               </div>
             </div>
 
-            <div className={styles.textEditor}>
-              <div className={styles.label}>Description</div>
+            <div className={styles.sliderInput}>
+              <div className={styles.label}>Approval Threshold</div>
 
               <div
                 className={styles.input}

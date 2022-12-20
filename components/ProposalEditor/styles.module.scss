@@ -141,7 +141,7 @@
   padding-bottom: 40px;
 
   .centerColumn {
-    width: 800px;
+    width: 1100px;
     display: flex;
     flex-direction: column;
 
@@ -215,6 +215,7 @@
     }
 
     .inputsContainer {
+      align-self: center;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -428,7 +429,8 @@
       }
 
       .bottomInputs {
-        width: 100%;
+        align-self: center;
+        width: 800px;
         display: flex;
         flex-direction: column;
         gap: 10px;

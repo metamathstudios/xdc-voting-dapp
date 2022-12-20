@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Theme, ThemeContext } from "../../../../contexts/themeContext";
+import { getAllProposals } from "../../../../services/api";
 import styles from "./styles.module.scss";
 
 const VoteCard = () => {
@@ -34,7 +35,16 @@ const VoteCard = () => {
 
         {votedWith === "" ? (
           <div className={styles.voteList}>
-            <div className={styles.yes}>Yes</div>
+            <div
+              className={styles.yes}
+              onClick={() => {
+                getAllProposals().then((res) => {
+                  console.log(res);
+                });
+              }}
+            >
+              Yes
+            </div>
             <div className={styles.no}>No</div>
             <div className={styles.abstain}>Abstain</div>
           </div>

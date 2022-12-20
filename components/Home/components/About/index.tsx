@@ -44,12 +44,14 @@ const About = () => {
               height={25}
             />
             <img
+              onClick={() => window.open("https://discord.gg/3BhJPFykAg")}
               src={theme == Theme.DARK ? WhiteDiscord.src : Discord.src}
               alt="Icon"
               width={25}
               height={25}
             />
             <img
+              onClick={() => window.open("https://twitter.com/xdc_community")}
               src={theme == Theme.DARK ? WhiteTwitter.src : Twitter.src}
               alt="Icon"
               width={25}
@@ -58,6 +60,7 @@ const About = () => {
           </div>
           <div className={styles.logo}>
             <img
+              onClick={() => window.open("https://docs.xdc.community/")}
               src={theme == Theme.DARK ? lightLogo.src : Logo.src}
               alt="Icon"
             />

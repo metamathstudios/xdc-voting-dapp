@@ -22,10 +22,6 @@ const List = () => {
         urls: ["www.link.com", "www.link.com", "www.link.com"],
         files: ["www.link.com", "www.link.com", "www.link.com"],
         options: ["Yes", "No", "Abstain"],
-        burnPercentage: 0.5,
-        burnAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
-        communityPercentage: 0.5,
-        communityAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
       },
     ]);
   }, []);

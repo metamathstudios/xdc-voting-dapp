@@ -1,16 +1,18 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useCallback, useContext } from "react";
-import { PopupContext } from "../../contexts/PopupContext";
+import { PopupContext } from "../../contexts/popupContext";
 import { Theme, ThemeContext } from "../../contexts/themeContext";
 import { Web3ModalContext } from "../../contexts/web3modal";
 import moon from "../../public/assets/darkmode/moon.svg";
 import sun from "../../public/assets/lightmode/sun.svg";
-import lightLogo from "../../public/assets/logo/lightLogo.svg";
 import logo from "../../public/assets/logo/votinglogo.svg";
 import { ellipseAddress } from "../../utils";
 import styles from "./styles.module.scss";
 
 const Navbar = () => {
+  const router = useRouter();
+
   const { setPopup } = useContext(PopupContext);
   const { theme, setTheme } = useContext(ThemeContext);
   const { disconnect, account } = useContext(Web3ModalContext);
@@ -23,11 +25,8 @@ const Navbar = () => {
     <div className={theme == Theme.DARK ? styles.dark : styles.light}>
       <div className={styles.container}>
         <div className={styles.limitedContainer}>
-          <div
-            className={styles.logo}
-            onClick={() => window.open("/", "_self")}
-          >
-            <Image src={theme == Theme.DARK ? lightLogo : logo} alt="Logo" />
+          <div className={styles.logo} onClick={() => router.push("/")}>
+            <Image src={logo} alt="Logo" />
           </div>
 
           <div className={styles.userOptions}>
