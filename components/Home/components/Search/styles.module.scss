@@ -1,22 +1,31 @@
 .dark {
   .container {
-    .search {
-      border: 1px solid rgba(45, 45, 45, 1);
+    .bordered {
+      border-color: rgba(45, 45, 45, 1) !important;
     }
 
-    .newProposal {
-      border: 1px solid rgba(45, 45, 45, 1);
+    .dropdownContainer {
+      border-color: rgba(45, 45, 45, 1) !important;
 
       span {
         color: white;
       }
-    }
 
-    .dropdown {
-      border: 1px solid rgba(45, 45, 45, 1);
+      .dropdown {
+        background-color: #242424;
+        border-color: rgba(45, 45, 45, 1) !important;
 
-      span {
-        color: white;
+        .optionsColumn {
+          background-color: #242424;
+
+          .option {
+            background-color: #242424;
+
+            &:hover {
+              background-color: #242424;
+            }
+          }
+        }
       }
     }
   }
@@ -26,44 +35,28 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-<<<<<<< HEAD
-
-  .search {
-=======
   align-items: center;
   gap: 10px;
-  
-  .bordered{
+
+  .bordered {
     width: 100%;
     display: flex;
     flex-direction: row;
-    border: 1.5px solid var(--lightline);
-    border-radius: 10px;
-  }
-
-  .search {
-    cursor: pointer;
-    padding: 8.5px;
-  }
-
-  .input {
->>>>>>> main
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 7px 12px;
     border: 1px solid var(--lightline);
     border-radius: 10px;
+    height: 50px;
 
     .input {
       width: 100%;
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
 
       :is(input) {
         width: 95%;
         border: none;
         outline: none;
         background: none;
-        margin-left: 10px;
 
         &::placeholder {
           color: var(--lightline);
@@ -73,48 +66,15 @@
     }
   }
 
-<<<<<<< HEAD
-  .newProposal {
-    width: 100%;
-    max-width: 170px;
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--lightline);
-    border-radius: 10px;
+  .search {
     cursor: pointer;
-
-    span {
-      margin-left: 10px;
-      color: var(--darkblue);
-      font-size: 16px;
-    }
+    padding: 8.5px;
   }
 
-  .dropdown {
-    width: 100%;
-    max-width: 70px;
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--lightline);
-    border-radius: 10px;
-    cursor: pointer;
-
-    span {
-      margin-right: 10px;
-      color: var(--darkblue);
-      font-size: 16px;
-    }
-  }
-}
-=======
   .new {
     &:hover {
       color: white;
-      background: #2049B9;
+      background: #2049b9;
 
       .image {
         filter: brightness(100);
@@ -131,7 +91,8 @@
     border: 1px solid var(--lightline);
     border-radius: 10px;
     padding: 16px;
-    font-size: 18px;
+    font-size: 16px;
+    height: 50px;
 
     .label {
       span {
@@ -159,7 +120,7 @@
         color: #484848;
         margin-top: 10px;
         transition: 0.1s;
-  
+
         &:hover {
           filter: contrast(100);
         }
@@ -167,4 +128,3 @@
     }
   }
 }
->>>>>>> main

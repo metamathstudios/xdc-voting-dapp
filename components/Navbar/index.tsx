@@ -12,7 +12,6 @@ import styles from "./styles.module.scss";
 
 const Navbar = () => {
   const router = useRouter();
-
   const { setPopup } = useContext(PopupContext);
   const { theme, setTheme } = useContext(ThemeContext);
   const { disconnect, account } = useContext(Web3ModalContext);
