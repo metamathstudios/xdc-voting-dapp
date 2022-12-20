@@ -1,32 +1,30 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
+import { PopupContext } from "../../contexts/popupContext";
+import { Theme, ThemeContext } from "../../contexts/themeContext";
+import { Web3ModalContext } from "../../contexts/web3modal";
 import moon from "../../public/assets/darkmode/moon.svg";
 import sun from "../../public/assets/lightmode/sun.svg";
 import logo from "../../public/assets/logo/votinglogo.svg";
+import { ellipseAddress } from "../../utils";
 import styles from "./styles.module.scss";
 
-import { PopupContext } from "../../contexts/PopupContext";
-import { Web3ModalContext } from "../../contexts/web3modal";
-import { ellipseAddress } from "../../utils";
-
 const Navbar = () => {
-  //false == light | true == dark
-  const [light, setLight] = useState(false);
-  const route = useRouter();
-
-  const { disconnect, account } = useContext(Web3ModalContext);
+  const router = useRouter();
   const { setPopup } = useContext(PopupContext);
+  const { theme, setTheme } = useContext(ThemeContext);
+  const { disconnect, account } = useContext(Web3ModalContext);
 
   const handleDisconnect = useCallback(() => {
     disconnect();
   }, [disconnect]);
 
   return (
-    <>
+    <div className={theme == Theme.DARK ? styles.dark : styles.light}>
       <div className={styles.container}>
         <div className={styles.limitedContainer}>
-          <div className={styles.logo} onClick={() => route.push('/')}>
+          <div className={styles.logo} onClick={() => router.push("/")}>
             <Image src={logo} alt="Logo" />
           </div>
 
@@ -45,11 +43,19 @@ const Navbar = () => {
             )}
 
             <div
-              className={light == false ? styles.lightMode : styles.darkMode}
-              onClick={() => setLight(!light)}
+              className={
+                theme == Theme.DARK ? styles.darkMode : styles.lightMode
+              }
+              onClick={() => {
+                if (theme == Theme.DARK) {
+                  setTheme(Theme.LIGHT);
+                } else {
+                  setTheme(Theme.DARK);
+                }
+              }}
             >
               <div className={styles.limitWidth}>
-                <Image src={light == false ? moon : sun} alt="Switch" />
+                <Image src={theme === Theme.DARK ? sun : moon} alt="Switch" />
               </div>
             </div>
           </div>
@@ -57,7 +63,7 @@ const Navbar = () => {
       </div>
 
       <div className={styles.line} />
-    </>
+    </div>
   );
 };
 

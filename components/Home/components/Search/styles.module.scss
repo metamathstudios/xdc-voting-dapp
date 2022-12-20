@@ -1,16 +1,69 @@
+.dark {
+  .container {
+    .bordered {
+      border-color: rgba(45, 45, 45, 1) !important;
+    }
+
+    .dropdownContainer {
+      border-color: rgba(45, 45, 45, 1) !important;
+
+      span {
+        color: white;
+      }
+
+      .dropdown {
+        background-color: #242424;
+        border-color: rgba(45, 45, 45, 1) !important;
+
+        .optionsColumn {
+          background-color: #242424;
+
+          .option {
+            background-color: #242424;
+
+            &:hover {
+              background-color: #242424;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .container {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  
-  .bordered{
+
+  .bordered {
     width: 100%;
     display: flex;
     flex-direction: row;
-    border: 1.5px solid var(--lightline);
+    border: 1px solid var(--lightline);
     border-radius: 10px;
+    height: 50px;
+
+    .input {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+
+      :is(input) {
+        width: 95%;
+        border: none;
+        outline: none;
+        background: none;
+
+        &::placeholder {
+          color: var(--lightline);
+          font-family: Recursive, sans-serif;
+        }
+      }
+    }
   }
 
   .search {
@@ -18,27 +71,10 @@
     padding: 8.5px;
   }
 
-  .input {
-    width: 100%;
-    
-    :is(input) {
-      width: 100%;
-      height: 100%;
-      border: none;
-      outline: none;
-      background: none;
-
-      &::placeholder {
-        color: var(--lightline);
-        font-family: Recursive, sans-serif;
-      }
-    }
-  }
-
   .new {
     &:hover {
       color: white;
-      background: #2049B9;
+      background: #2049b9;
 
       .image {
         filter: brightness(100);
@@ -55,7 +91,8 @@
     border: 1px solid var(--lightline);
     border-radius: 10px;
     padding: 16px;
-    font-size: 18px;
+    font-size: 16px;
+    height: 50px;
 
     .label {
       span {
@@ -83,7 +120,7 @@
         color: #484848;
         margin-top: 10px;
         transition: 0.1s;
-  
+
         &:hover {
           filter: contrast(100);
         }

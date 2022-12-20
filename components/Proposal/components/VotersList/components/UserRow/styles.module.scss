@@ -1,3 +1,23 @@
+.dark {
+  .container {
+    background-color: #242424;
+
+    .userContainer {
+      .name {
+        color: rgba(109, 109, 109, 1);
+      }
+    }
+
+    .dateContainer {
+      color: rgba(109, 109, 109, 1);
+    }
+  }
+
+  .line {
+    background-color: rgba(45, 45, 45, 1);
+  }
+}
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -9,12 +29,12 @@
     align-items: center;
     font-size: 14px;
     font-weight: 500;
-    
+
     .profile {
       margin: 0px 5px 0px 0px;
       width: 15px;
       height: 15px;
-      background: #2049B9;
+      background: #2049b9;
       border-radius: 15px;
     }
   }
@@ -23,7 +43,7 @@
     display: flex;
     align-items: center;
     font-size: 12px;
-    color: #BCBCBC;
+    color: #bcbcbc;
   }
 }
 

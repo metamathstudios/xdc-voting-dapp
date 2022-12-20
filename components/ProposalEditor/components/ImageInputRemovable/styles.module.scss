@@ -1,3 +1,24 @@
+.dark {
+  .container {
+    .label {
+      color: white;
+    }
+
+    .textButton {
+      border-color: rgba(45, 45, 45, 1) !important;
+      color: white !important;
+    }
+
+    .button {
+      border-color: rgba(45, 45, 45, 1) !important;
+
+      .image {
+        filter: brightness(100);
+      }
+    }
+  }
+}
+
 .container {
   width: 100%;
   display: flex;
@@ -14,7 +35,7 @@
       :is(input) {
         width: 650px;
         height: 35px;
-        border: 1px solid #D9D9D9;
+        border: 1px solid #d9d9d9;
         border-radius: 5px;
         outline: none;
         padding: 0px 0px 0px 10px;
@@ -27,11 +48,11 @@
       text-align: center;
       font-size: 13px;
       padding: 9px 9px;
-      border: 1px solid #D9D9D9;
+      border: 1px solid #d9d9d9;
       border-radius: 5px;
-      color: #2356DF;
+      color: #2356df;
       transition: 0.3s;
-      
+
       :is(input) {
         width: 94px;
         height: 35px;
@@ -43,7 +64,7 @@
       }
 
       &:hover {
-        background: #2356DF;
+        background: #2356df;
         color: white;
       }
     }
@@ -53,12 +74,12 @@
       display: flex;
       align-items: center;
       padding: 0px 7px;
-      border: 1px solid #D9D9D9;
+      border: 1px solid #d9d9d9;
       border-radius: 5px;
       transition: 0.3s;
-      
+
       &:hover {
-        background: #2356DF;
+        background: #2356df;
 
         .image {
           filter: brightness(100);
