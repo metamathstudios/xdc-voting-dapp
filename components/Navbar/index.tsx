@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useContext } from "react";
-import { PopupContext } from "../../contexts/popupContext";
+import { PopupContext } from "../../contexts/PopupContext";
 import { Theme, ThemeContext } from "../../contexts/themeContext";
 import { Web3ModalContext } from "../../contexts/web3modal";
 import moon from "../../public/assets/darkmode/moon.svg";
