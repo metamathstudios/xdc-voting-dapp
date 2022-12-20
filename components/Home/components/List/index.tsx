@@ -33,7 +33,23 @@ const List = () => {
   return (
     <div className={styles.listContainer}>
       {data.map((value, index) => {
-        return <Card key={index} data={data[index]} />;
+        if (index !== 0) {
+          return (
+            <>
+              <div style={{ marginTop: "2px", width: "100%" }}>
+                <Card key={index} data={data[index]} />
+              </div>
+            </>
+          );
+        } else {
+          return (
+            <>
+              <div style={{ marginTop: "2px", width: "100%" }}>
+                <Card key={index} data={data[index]} />
+              </div>
+            </>
+          );
+        }
       })}
     </div>
   );

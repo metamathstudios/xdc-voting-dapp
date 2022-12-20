@@ -1,9 +1,42 @@
+.dark {
+  width: 100%;
+  max-width: 320px;
+
+  .container {
+    border-color: rgba(45, 45, 45, 1);
+
+    .votersContainer {
+      .label {
+        color: white;
+      }
+
+      .totalVotes {
+        color: rgba(109, 109, 109, 1);
+      }
+    }
+
+    .seeMoreContainer {
+      color: rgba(72, 72, 72, 1);
+    }
+
+    .line {
+      background-color: rgba(45, 45, 45, 1);
+    }
+  }
+}
+
+.light {
+  width: 100%;
+  max-width: 320px;
+}
+
 .container {
   width: 100%;
   max-width: 320px;
   border: 1px solid var(--lightline);
   border-radius: 10px;
-  
+  margin-top: 20px;
+
   .votersContainer {
     padding: 20px;
     display: flex;

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Theme, ThemeContext } from "../../contexts/themeContext";
 import backArrow from "../../public/assets/svgicons/backArrow.svg";
 import share from "../../public/assets/svgicons/share.svg";
 import { ellipseAddress } from "../../utils";
@@ -8,6 +9,7 @@ import Timing from "../reusable/Timing";
 import Contract from "./components/Contract";
 import Results from "./components/Results";
 import VoteCard from "./components/VoteCard";
+import VotersList from "./components/VotersList";
 import styles from "./styles.module.scss";
 
 interface Votes {
@@ -18,6 +20,8 @@ interface Votes {
 
 const ProposalComponent = () => {
   const route = useRouter();
+
+  const { theme } = useContext(ThemeContext);
 
   const [data, setData] = useState<any>({});
   const [status, setStatus] = useState<StatusType>(StatusType.ACTIVE);
@@ -86,75 +90,78 @@ const ProposalComponent = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.centerColumn}>
-        <div className={styles.actions}>
-          <div
-            className={styles.back}
-            onClick={() => {
-              route.push("/");
-            }}
-          >
-            <img src={backArrow.src} alt="Timing" />
-            <span>Back</span>
+    <div className={theme == Theme.DARK ? styles.dark : styles.light}>
+      <div className={styles.container}>
+        <div className={styles.centerColumn}>
+          <div className={styles.actions}>
+            <div
+              className={styles.back}
+              onClick={() => {
+                route.push("/");
+              }}
+            >
+              <img src={backArrow.src} alt="Timing" />
+              <span>Back</span>
+            </div>
           </div>
-        </div>
-        <div className={styles.wrapper}>
-          <div className={styles.content}>
-            <div className={styles.header}>
-              <div className={styles.top}>
-                <div className={styles.left}>
-                  <div className={styles.icon} />
-                  <div className={styles.walletId}>
-                    {ellipseAddress(data.creator)}
+          <div className={styles.wrapper}>
+            <div className={styles.content}>
+              <div className={styles.header}>
+                <div className={styles.top}>
+                  <div className={styles.left}>
+                    <div className={styles.icon} />
+                    <div className={styles.walletId}>
+                      {ellipseAddress(data.creator)}
+                    </div>
+                    <div className={styles.postDate}>
+                      Posted on {data.postedOn}
+                    </div>
                   </div>
-                  <div className={styles.postDate}>
-                    Posted on {data.postedOn}
+                  <div className={styles.right}>
+                    <Timing closes={data.closes} />
                   </div>
                 </div>
-                <div className={styles.right}>
-                  <Timing closes={data.closes} />
+
+                <div className={styles.title}>{data.title}</div>
+
+                <div className={styles.footer}>
+                  <div className={styles.left}>
+                    <Status status={status} />
+
+                    <div className={styles.tagList}>
+                      {data.tags &&
+                        data.tags.slice(0, 4).map((value, index) => {
+                          return (
+                            <div className={styles.tag} key={index}>
+                              {data.tags[index]}
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </div>
+                  <div className={styles.right}>
+                    <div className={styles.share}>
+                      <span>Share</span>
+                      <img src={share.src} alt="Search" />
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className={styles.title}>{data.title}</div>
-
-              <div className={styles.footer}>
-                <div className={styles.left}>
-                  <Status status={status} />
-
-                  <div className={styles.tagList}>
-                    {data.tags &&
-                      data.tags.slice(0, 4).map((value, index) => {
-                        return (
-                          <div className={styles.tag} key={index}>
-                            {data.tags[index]}
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
-                <div className={styles.right}>
-                  <div className={styles.share}>
-                    <span>Share</span>
-                    <img src={share.src} alt="Search" />
-                  </div>
-                </div>
+              <div className={styles.infos}>
+                <div className={styles.text}>{data.description}</div>
               </div>
             </div>
 
-            <div className={styles.infos}>
-              <div className={styles.text}>{data.description}</div>
+            <div className={styles.sides}>
+              <VoteCard />
+              <Results votes={votes} />
+              <VotersList />
+              <Contract
+                contractAddress={data.contract}
+                link="https://google.com"
+              />
             </div>
-          </div>
-
-          <div className={styles.sides}>
-            <VoteCard />
-            <Results votes={votes} />
-            <Contract
-              contractAddress={data.contract}
-              link="https://google.com"
-            />
           </div>
         </div>
       </div>

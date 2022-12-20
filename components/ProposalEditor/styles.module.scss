@@ -1,3 +1,138 @@
+.dark {
+  .container {
+    background-color: #242424;
+
+    .centerColumn {
+      .userOptions {
+        .backContainer {
+          color: white;
+          filter: brightness(100);
+        }
+
+        .rightContainer {
+          .preview {
+            border: 1px solid rgba(45, 45, 45, 1);
+            color: white;
+
+            .image {
+              filter: brightness(100);
+            }
+          }
+
+          .publish {
+            border: 1px solid rgba(45, 45, 45, 1);
+            color: white;
+
+            .image {
+              filter: brightness(100);
+            }
+          }
+        }
+      }
+
+      .inputsContainer {
+        .label {
+          color: white;
+        }
+
+        :is(input) {
+          background-color: rgba(36, 36, 36, 1);
+          color: white;
+          border-color: rgba(45, 45, 45, 1) !important;
+        }
+
+        .tagInput {
+          .input {
+            border-color: rgba(45, 45, 45, 1) !important;
+          }
+        }
+
+        .inputRow {
+          .startDate {
+            .input input[type="date"]::-webkit-calendar-picker-indicator {
+              color: rgba(0, 0, 0, 0);
+              opacity: 1;
+              background-image: url("./assets/date.svg");
+              background-repeat: no-repeat;
+              background-position: 100%;
+              background-size: 15px;
+              cursor: pointer;
+            }
+          }
+
+          .endDate {
+            .input input[type="date"]::-webkit-calendar-picker-indicator {
+              color: rgba(0, 0, 0, 0);
+              opacity: 1;
+              background-image: url("./assets/date.svg");
+              background-repeat: no-repeat;
+              background-position: 100%;
+              background-size: 15px;
+              cursor: pointer;
+            }
+          }
+
+          .sliderInput {
+            width: 387px;
+
+            .input {
+              margin-top: 13px;
+
+              span {
+                color: rgba(30, 30, 30, 1) !important;
+              }
+
+              span[data-index="0"] {
+                background-color: white;
+              }
+
+              span[data-index="1"] {
+                background-color: white;
+              }
+
+              span[data-index="2"] {
+                background-color: white;
+              }
+
+              span[data-index="3"] {
+                background-color: white;
+              }
+
+              span[data-index="4"] {
+                background-color: white;
+              }
+
+              span[data-index="5"] {
+                background-color: white;
+              }
+
+              span[data-index="6"] {
+                background-color: white;
+              }
+
+              span[data-index="7"] {
+                background-color: white;
+              }
+
+              span[data-index="8"] {
+                background-color: white;
+              }
+
+              span[data-index="9"] {
+                background-color: white;
+              }
+
+              span[data-index="10"] {
+                background-color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .container {
   max-width: 100%;
   display: flex;
@@ -23,7 +158,7 @@
         flex-direction: row;
         align-items: center;
         gap: 5px;
-        color: #2049B9;
+        color: #2049b9;
       }
 
       .rightContainer {
@@ -37,14 +172,14 @@
           flex-direction: row;
           align-items: center;
           gap: 5px;
-          border: solid 1px #D9D9D9;
+          border: solid 1px #d9d9d9;
           padding: 10px;
           border-radius: 7px;
           transition: 0.3s;
 
           &:hover {
             color: white;
-            background: #2049B9;
+            background: #2049b9;
 
             .image {
               filter: brightness(100);
@@ -58,7 +193,7 @@
           flex-direction: row;
           align-items: center;
           gap: 5px;
-          border: solid 1px #D9D9D9;
+          border: solid 1px #d9d9d9;
           padding: 10px;
           border-radius: 7px;
           transition: 0.3s;
@@ -69,7 +204,7 @@
 
           &:hover {
             color: white;
-            background: #2049B9;
+            background: #2049b9;
 
             .image {
               filter: brightness(100);
@@ -90,14 +225,13 @@
         gap: 25px;
 
         .startDate {
-
           .label {
             margin-bottom: 10px;
           }
 
           :is(input) {
             border-radius: 7px;
-            border: 1px solid #D9D9D9;
+            border: 1px solid #d9d9d9;
             padding: 10px;
             width: 387px;
             outline: none;
@@ -106,14 +240,13 @@
         }
 
         .endDate {
-
           .label {
             margin-bottom: 10px;
           }
 
           :is(input) {
             border-radius: 7px;
-            border: 1px solid #D9D9D9;
+            border: 1px solid #d9d9d9;
             padding: 10px;
             width: 387px;
             outline: none;
@@ -123,21 +256,68 @@
 
         .sliderInput {
           width: 387px;
-          
+
           .input {
             margin-top: 13px;
+
+            span {
+              color: rgba(217, 217, 217, 1) !important;
+            }
+
+            span[data-index="0"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="1"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="2"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="3"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="4"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="5"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="6"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="7"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="8"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="9"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
+
+            span[data-index="10"] {
+              background-color: rgba(35, 86, 223, 1);
+            }
           }
         }
 
         .votingToll {
-
           .label {
             margin-bottom: 10px;
           }
 
           :is(input) {
             border-radius: 7px;
-            border: 1px solid #D9D9D9;
+            border: 1px solid #d9d9d9;
             padding: 10px;
             width: 387px;
             outline: none;
@@ -159,7 +339,7 @@
           height: 38px;
           display: flex;
           flex-direction: row;
-          border: 1px solid #D9D9D9;
+          border: 1px solid #d9d9d9;
           border-radius: 7px;
 
           .tagContainer {
@@ -170,7 +350,7 @@
             margin: 7px;
             padding: 10px;
             gap: 5px;
-            background: #D9D9D9;
+            background: #d9d9d9;
             border-radius: 20px;
             color: #484848;
             font-size: 14px;
@@ -198,7 +378,7 @@
             margin: 7px;
             padding: 10px;
             gap: 5px;
-            background: #D9D9D9;
+            background: #d9d9d9;
             border-radius: 20px;
             color: #484848;
             font-size: 14px;
@@ -227,21 +407,22 @@
         :is(input) {
           width: 100%;
           padding: 10px;
-          border: 1px solid #D9D9D9;
+          border: 1px solid #d9d9d9;
           border-radius: 7px;
           outline: none;
         }
       }
 
       .textEditor {
-        
         .label {
           margin-bottom: 10px;
         }
 
         .input {
-          :is(div) {border-radius: 7px;}
-          border: 1px solid #D9D9D9;
+          :is(div) {
+            border-radius: 7px;
+          }
+          border: 1px solid #d9d9d9;
           border-radius: 7px;
         }
       }

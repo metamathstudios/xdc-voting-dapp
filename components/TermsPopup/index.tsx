@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useCallback, useContext, useState } from "react";
-import { PopupContext } from "../../contexts/PopupContext";
+import { PopupContext } from "../../contexts/popupContext";
 import { Web3ModalContext } from "../../contexts/web3modal";
 import close from "../../public/assets/svgicons/close.svg";
 import styles from "./styles.module.scss";

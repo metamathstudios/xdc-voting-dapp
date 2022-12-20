@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Theme, ThemeContext } from "../../../../contexts/themeContext";
 import styles from "./styles.module.scss";
 
 const VoteCard = () => {
+  const { theme } = useContext(ThemeContext);
+
   const [votedWith, setVotedWith] = useState("");
 
   const getColorByVote = (vote: string) => {
@@ -25,23 +28,25 @@ const VoteCard = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>Cast your vote</div>
+    <div className={theme == Theme.DARK ? styles.dark : styles.light}>
+      <div className={styles.container}>
+        <div className={styles.header}>Cast your vote</div>
 
-      {votedWith === "" ? (
-        <div className={styles.voteList}>
-          <div className={styles.yes}>Yes</div>
-          <div className={styles.no}>No</div>
-          <div className={styles.abstain}>Abstain</div>
-        </div>
-      ) : (
-        <div
-          className={styles.alreadyVoted}
-          style={{ color: getColorByVote(votedWith) }}
-        >
-          You have already voted!
-        </div>
-      )}
+        {votedWith === "" ? (
+          <div className={styles.voteList}>
+            <div className={styles.yes}>Yes</div>
+            <div className={styles.no}>No</div>
+            <div className={styles.abstain}>Abstain</div>
+          </div>
+        ) : (
+          <div
+            className={styles.alreadyVoted}
+            style={{ color: getColorByVote(votedWith) }}
+          >
+            You have already voted!
+          </div>
+        )}
+      </div>
     </div>
   );
 };

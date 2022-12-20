@@ -1,3 +1,60 @@
+.dark {
+  .container {
+    background-color: #242424;
+
+    .actions {
+      .back {
+        span {
+          color: white !important;
+        }
+
+        img {
+          filter: brightness(100);
+        }
+      }
+    }
+
+    .wrapper {
+      .content {
+        .header {
+          .top {
+            .left {
+              .walletId {
+                color: white !important;
+              }
+
+              .postDate {
+                color: rgba(72, 72, 72, 1) !important;
+              }
+            }
+          }
+
+          .title {
+            color: white !important;
+          }
+
+          .footer {
+            .left {
+              .tagList {
+                .tag {
+                  background-color: rgba(72, 72, 72, 1) !important;
+                  color: white !important;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .infos {
+        .text {
+          color: rgba(188, 188, 188, 1);
+        }
+      }
+    }
+  }
+}
+
 .container {
   max-width: 100%;
   display: flex;
@@ -165,33 +222,11 @@
             }
           }
         }
+      }
 
-        .infos {
-          display: flex;
-          text-align: justify;
-          flex-direction: column;
-
-          .links {
-            display: flex;
-            flex-direction: column;
-
-            .linksTitle {
-              margin-top: 20px;
-              margin-bottom: 10px;
-            }
-
-            .link {
-              color: blue;
-            }
-          }
-
-          .files {
-            margin-top: 20px;
-          }
-
-          .files > * {
-            margin-left: 0;
-          }
+      .infos {
+        .text {
+          font-size: 16px;
         }
       }
 
