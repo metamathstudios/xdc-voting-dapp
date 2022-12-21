@@ -6,22 +6,26 @@ import ProposalsProvider from "../contexts/ProposalsContext";
 import Web3ModalProvider from "../contexts/Web3ModalProvider";
 import BlockchainProvider from "../contexts/BlockchainProvider";
 import StatusUpdater from "../contexts/StatusUpdater";
+import { Theme, ThemeContext } from "../contexts/themeContext";
 import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [popup, setPopup] = useState(false);
+  const [theme, setTheme] = useState(Theme.LIGHT);
 
   return (
-    <Web3ModalProvider>
-      <BlockchainProvider>
-        <PopupContext.Provider value={{ popup, setPopup }}>
-          <ProposalsProvider>
-            <StatusUpdater>
-              <Component {...pageProps} />
-            </StatusUpdater>
-          </ProposalsProvider>
-        </PopupContext.Provider>
-      </BlockchainProvider>
-    </Web3ModalProvider>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Web3ModalProvider>
+        <BlockchainProvider>
+          <PopupContext.Provider value={{ popup, setPopup }}>
+            <ProposalsProvider>
+              <StatusUpdater>
+                <Component {...pageProps} />
+              </StatusUpdater>
+            </ProposalsProvider>
+          </PopupContext.Provider>
+        </BlockchainProvider>
+      </Web3ModalProvider>
+    </ThemeContext.Provider>
   );
 }

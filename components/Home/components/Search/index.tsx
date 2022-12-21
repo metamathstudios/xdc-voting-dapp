@@ -1,23 +1,24 @@
 import { useRouter } from "next/router";
 import { useContext, useState, KeyboardEvent } from "react";
+import { Theme, ThemeContext } from "../../../../contexts/themeContext";
 import Image from "next/image";
 
 import Button from "../../../reusable/Button";
 import { Web3ModalContext } from "../../../../contexts/Web3ModalProvider";
 import { ProposalsContext } from "../../../../contexts/ProposalsContext";
-import type { Tag } from "../../../../services/api";
 
 import styles from "./styles.module.scss";
 
 import newicon from "../../../../public/assets/svgicons/new.svg";
 import search from "../../../../public/assets/svgicons/search.svg";
-import dropdownsvg from './assets/dropdown.svg'
+import dropdownsvg from "./assets/dropdown.svg";
 
 const Search = () => {
   const route = useRouter();
 
   const { query, all, byTag } = useContext(ProposalsContext);
   const { account } = useContext(Web3ModalContext);
+  const { theme } = useContext(ThemeContext);
 
   const [dropdown, setDropdown] = useState(false)
   const [tag, setTag] = useState('All')
@@ -43,7 +44,7 @@ const Search = () => {
   };
 
   return (
-    <>
+    <div className={theme == Theme.DARK ? styles.dark : styles.light}>
       <div className={styles.container}>
         <div className={styles.bordered}>
           <div className={styles.search}>
@@ -56,7 +57,7 @@ const Search = () => {
             <input type="text" placeholder="Search" onChange={(e) => setSearchText(e.target.value)} onKeyDown={handleEnterPress}/>
           </div>
         </div>
-        {account &&
+        {account && (
           <div
             style={tag == 'XDC Community' ? { width: "260px", margin: '0px 0px 0px -10px' } : { width: "240px", margin: '0px 0px 0px -10px' }}
             onClick={() => {
@@ -65,18 +66,21 @@ const Search = () => {
           >
             <Button icon={newicon} text="New Proposal" />
           </div>
-        }
-        
-        <div className={styles.dropdownContainer} onClick={() => setDropdown(!dropdown)}>
+        )}
+
+        <div
+          className={styles.dropdownContainer}
+          onClick={() => setDropdown(!dropdown)}
+        >
           <div className={styles.label}>
             <span>{tag}</span>
           </div>
 
           <div className={styles.icon}>
-            <Image src={dropdownsvg} alt='Drop' />
+            <Image src={dropdownsvg} alt="Drop" />
           </div>
 
-          {dropdown &&
+          {dropdown && (
             <div className={styles.dropdown}>
               <div className={styles.optionsColumn}>
                 <div className={styles.option} onClick={() => {
@@ -114,11 +118,10 @@ const Search = () => {
                 </div>
               </div>
             </div>
-          }
+          )}
         </div>
-
       </div>
-    </>
+    </div>
   );
 };
 

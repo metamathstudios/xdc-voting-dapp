@@ -1,3 +1,22 @@
+.dark {
+  width: 100%;
+  max-width: 320px;
+
+  .container {
+    border-color: rgba(45, 45, 45, 1);
+
+    .header {
+      color: white;
+      border-color: rgba(45, 45, 45, 1);
+    }
+  }
+}
+
+.light {
+  width: 100%;
+  max-width: 320px;
+}
+
 .container {
   width: 100%;
   max-width: 320px;

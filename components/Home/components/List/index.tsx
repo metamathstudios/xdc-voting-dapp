@@ -5,7 +5,6 @@ import { ProposalsContext } from "../../../../contexts/ProposalsContext";
 
 const List = () => {
   const [data, setData] = useState<any>([]);
-
   const { proposals, all, byId } = useContext(ProposalsContext);
 
   useEffect(() => {

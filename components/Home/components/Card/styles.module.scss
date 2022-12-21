@@ -1,3 +1,48 @@
+.dark {
+  .container {
+    outline-color: rgba(45, 45, 45, 1);
+
+    .header {
+      .left {
+        .walletId {
+          color: rgba(188, 188, 188, 1);
+        }
+      }
+    }
+
+    .content {
+      .title {
+        color: rgba(255, 255, 255, 1);
+      }
+
+      .description {
+        color: rgba(188, 188, 188, 1);
+      }
+    }
+
+    .tagList {
+      .tag {
+        background: #484848;
+        color: white;
+      }
+    }
+
+    .footer {
+      .left {
+        .text {
+          color: rgba(109, 109, 109, 1);
+        }
+      }
+
+      .right {
+        .text {
+          color: rgba(188, 188, 188, 1);
+        }
+      }
+    }
+  }
+}
+
 .container {
   width: 99%;
   outline: 1.5px solid var(--lightline);
