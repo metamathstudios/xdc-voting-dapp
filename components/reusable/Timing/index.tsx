@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import clock from "../../../public/assets/svgicons/clock.svg";
 import clockEndend from "../../../public/assets/svgicons/clockEndend.svg";
 import { toHHMMSS } from "../../../utils";
 import styles from "./styles.module.scss";
+import { Theme, ThemeContext } from "../../../contexts/themeContext";
 
 interface Status {
   closes: number;
@@ -11,6 +12,7 @@ interface Status {
 
 const Timing = (props: Status) => {
   const [time, setTime] = useState("00:00:00");
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     setInterval(() => {
@@ -30,7 +32,7 @@ const Timing = (props: Status) => {
       ) : (
         <>
           <img src={clock.src} alt="Timing" />
-          <div className={styles.timing}>{time}</div>
+          <div className={theme == Theme.DARK ? styles.timingDark : styles.timing}>{time}</div>
         </>
       )}
     </div>

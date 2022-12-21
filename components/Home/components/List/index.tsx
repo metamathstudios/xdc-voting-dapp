@@ -17,7 +17,7 @@ const List = () => {
     
     setData(proposals);
     
-    if(proposals.length > 0) {
+    if(proposals?.length > 0) {
       byId(proposals.length);
     }
   }, [proposals]);

@@ -16,7 +16,6 @@ import styles from "./styles.module.scss";
 import { ProposalsContext } from "../../contexts/ProposalsContext";
 import { ExplorerUrl } from "../../blockchain/constants";
 import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
-import Timing from "../reusable/Timing";
 
 interface Votes {
   yes: number;
@@ -128,13 +127,9 @@ const ProposalComponent = () => {
                   <div className={styles.image}>
                     <Image src={publish} alt="Publish" width={16} />
                   </div>
-                  <div className={styles.postDate}>
-                    Posted on {postedOn}
-                  </div>
+
+                  <div className={styles.text}>Publish</div>
                 </div >
-                <div className={styles.right}>
-                  <Timing closes={Number(current.closes)} />
-                </div>
               </div >
             ) : (
               <></>
@@ -144,13 +139,17 @@ const ProposalComponent = () => {
             <div className={styles.content}>
               <div className={styles.header}>
                 <div className={styles.top}>
+                
                   <div className={styles.left}>
+                  
                     <div className={styles.icon} />
                     <div className={styles.walletId}>
                       {ellipseAddress(data.creator)}
                     </div>
                     <div className={styles.postDate}>Posted on {postedOn}</div>
                   </div>
+
+                  
 
                   <div className={styles.title}>{data.title}</div>
 

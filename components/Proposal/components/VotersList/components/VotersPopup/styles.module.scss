@@ -1,76 +1,30 @@
-.dark {
-  .container {
-    .popupContainer {
-      background-color: #242424;
-
-      .votersContainer {
-        :is(span) {
-          color: white;
-        }
-      }
-
-      .dataContainer {
-        border: 1px solid rgba(45, 45, 45, 1);
-      }
-    }
-  }
-}
-
 .container {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   right: 0;
   top: 0;
   background: rgba(0, 0, 0, 0.592);
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   .centralizePopup {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 600px;
-    background-color: white;
-    opacity: 1;
-    border-radius: 12px;
-    padding: 15px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     .popupContainer {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 0px 10px 10px 10px;
-      color: #bcbcbc;
-      font-size: 15px;
+      width: 520px;
+      height: 550px;
+      background-color: white;
+      opacity: 1.0;
+      border-radius: 12px;
+      padding: 15px;
 
-      :is(span) {
-        color: black;
-        font-weight: 500;
-        font-size: 14px;
-      }
-
-      .votes {
-        color: rgba(188, 188, 188, 1);
-      }
-    }
-
-    .dataContainer {
-      border: 1px solid var(--lightline);
-      border-radius: 10px;
-      padding: 0px 6px 2px 5px;
-      margin-top: -5px;
-    }
-
-    .list {
-      width: calc(100% - 50px);
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-
-      :is(ul) {
+      .closeContainer {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
@@ -82,7 +36,7 @@
         flex-direction: row;
         justify-content: space-between;
         padding: 0px 10px 10px 10px;
-        color: #bcbcbc;
+        color: #BCBCBC;
         font-size: 15px;
 
         :is(span) {
@@ -97,7 +51,7 @@
         padding: 0px 6px 2px 5px;
         margin-top: -5px;
       }
-
+      
       .list {
         width: calc(100% - 50px);
         display: flex;
@@ -111,13 +65,13 @@
           color: white;
           font-size: 14px;
         }
-
+        
         .activeButton {
           cursor: pointer;
           width: 25px;
           height: 25px;
           padding-top: 4px;
-          background-color: #2049b9;
+          background-color: #2049B9;
           border-radius: 5px;
           text-align: center;
         }
@@ -127,9 +81,9 @@
           width: 25px;
           height: 25px;
           padding-top: 4px;
-          outline: 1px solid #bcbcbc;
+          outline: 1px solid #BCBCBC;
           border-radius: 5px;
-          color: #bcbcbc;
+          color: #BCBCBC;
           text-align: center;
           pointer-events: visibleFill;
         }

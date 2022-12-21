@@ -68,37 +68,31 @@ const About = () => {
             <div className={styles.left}>Total XDC spent:</div>
             <div className={styles.right}>{totalXDCSpent}</div>
           </div>
+        </div>
 
           <div className={styles.footer}>
-            <div className={styles.social}>
-              <img
-                src={theme == Theme.DARK ? WhiteInstagram.src : Instagram.src}
-                alt="Icon"
-                width={25}
-                height={25}
-              />
-              <img
-                onClick={() => window.open("https://discord.gg/3BhJPFykAg")}
-                src={theme == Theme.DARK ? WhiteDiscord.src : Discord.src}
-                alt="Icon"
-                width={25}
-                height={25}
-              />
-              <img
-                onClick={() => window.open("https://twitter.com/xdc_community")}
-                src={theme == Theme.DARK ? WhiteTwitter.src : Twitter.src}
-                alt="Icon"
-                width={25}
-                height={25}
-              />
-            </div>
-            <div className={styles.logo}>
-              <img
-                onClick={() => window.open("https://docs.xdc.community/")}
-                src={theme == Theme.DARK ? lightLogo.src : Logo.src}
-                alt="Icon"
-              />
-            </div>
+          <div className={styles.social}>
+            <img
+              onClick={() => window.open("https://discord.gg/3BhJPFykAg")}
+              src={theme == Theme.DARK ? WhiteDiscord.src : Discord.src}
+              alt="Icon"
+              width={25}
+              height={25}
+            />
+            <img
+              onClick={() => window.open("https://twitter.com/xdc_community")}
+              src={theme == Theme.DARK ? WhiteTwitter.src : Twitter.src}
+              alt="Icon"
+              width={25}
+              height={25}
+            />
+          </div>
+          <div className={styles.logo}>
+            <img
+              onClick={() => window.open("https://docs.xdc.community/")}
+              src={theme == Theme.DARK ? lightLogo.src : Logo.src}
+              alt="Icon"
+            />
           </div>
         </div>
       </div>

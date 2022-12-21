@@ -22,4 +22,21 @@ a {
 
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff #3c3c3c;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #3c3c3c;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 0px;
+  border: 0px solid #3c3c3c;
 }
