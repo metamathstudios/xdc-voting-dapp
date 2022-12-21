@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import { getAllProposals } from "../../../../services/api";
 
 const VoteCard = () => {
+
+
   const [votedWith, setVotedWith] = useState("");
 
   const getColorByVote = (vote: string) => {
@@ -31,11 +32,7 @@ const VoteCard = () => {
 
       {votedWith === "" ? (
         <div className={styles.voteList}>
-          <div className={styles.yes} onClick={() => {
-            getAllProposals().then((res) => {
-              console.log(res);
-            });
-          }}>Yes</div>
+          <div className={styles.yes}>Yes</div>
           <div className={styles.no}>No</div>
           <div className={styles.abstain}>Abstain</div>
         </div>

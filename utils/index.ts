@@ -11,7 +11,9 @@ export function toHHMMSS(secs) {
   var minutes = Math.floor(sec_num / 60) % 60;
   var seconds = sec_num % 60;
 
-  return [hours, minutes, seconds].map((v) => (v < 10 ? "0" + v : v)).join(":");
+  var time = [hours, minutes, seconds].map((v) => (v < 10 ? "0" + v : v)).join(":");
+  if (time.length > 8) return
+  return time
 }
 
 export function getPercentage(num, total) {

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import share from "../../public/assets/svgicons/share.svg";
 import { ellipseAddress } from "../../utils";
 import Status, { StatusType } from "../reusable/Status";
@@ -13,6 +13,9 @@ import back from '../../public/assets/svgicons/backArrow.svg';
 import edit from '../../public/assets/svgicons/edit.svg';
 import publish from '../../public/assets/svgicons/publish.svg';
 import styles from "./styles.module.scss";
+import { ProposalsContext } from "../../contexts/ProposalsContext";
+import { ExplorerUrl } from "../../blockchain/constants";
+import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
 
 interface Votes {
   yes: number;
@@ -23,6 +26,7 @@ interface Votes {
 const ProposalComponent = () => {
   const route = useRouter();
 
+  
   const [data, setData] = useState<any>({});
   const [status, setStatus] = useState<StatusType>(StatusType.ACTIVE);
   const [votes, setVotes] = useState<Votes>({
@@ -31,68 +35,24 @@ const ProposalComponent = () => {
     abstain: 10,
   });
   const [postedOn, setPostedOn] = useState<string>("");
+  const [closingTime, setClosingTime] = useState<number>(0);
+
+  const { current, byId } = useContext(ProposalsContext);
+  const { chainId } = useContext(Web3ModalContext);
+  
+  const id = parseInt(route.asPath.split("/")[2]);
 
   useEffect(() => {
+    
+  if (id && current?.proposal !== id) {
+    const getData = async () => {
+      await byId(id)
+    }
+    getData();
+  }
+  setData(current);
 
-    setData({
-      title: "The title of the page",
-      tags: ["CORE", "TREASURY", "URGENT", "XDC_COMMUNITY"],
-      description:
-        `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim veniam, quis nostrud exercitation ullamco laboris
-        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat
-        nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-        sunt in culpa qui officia deserunt mollit anim id est laborum.
-        \n \n
-        \n \n
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-        quae ab illo inventore veritatis et quasi architecto beatae vitae
-        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-        aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-        eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-        est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-        velit, sed quia non numquam eius modi tempora incidunt ut labore
-        et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-        veniam, quis nostrum exercitationem ullam corporis suscipit
-        laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem
-        vel eum iure reprehenderit qui in ea voluptate velit esse quam
-        nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-        voluptas nulla pariatur? Sed ut perspiciatis unde omnis iste natus
-        error sit voluptatem accusantium doloremque laudantium, totam rem
-        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-        voluptatem quia voluptas sit aspernatur aut odit aut fugit
-        \n \n
-        \n \n
-        sed quia consequuntur magni dolores eos qui ratione voluptatem
-        sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-        dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-        eius modi tempora incidunt ut labore et dolore magnam aliquam
-        quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
-        ex ea commodi consequatur? Quis autem vel eum iure reprehenderit
-        qui in ea voluptate velit esse quam nihil molestiae consequatur,
-        vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`,
-      contract: "0x514910771af9ca656af840dff83e8264ecf986ca",
-      id: 1,
-      creator: "0x514910771af9ca656af840dff83e8264ecf986ca",
-      created: 1670896086,
-      opens: 1670896086,
-      closes: 1670889353,
-      toll: 10,
-      urls: ["www.link.com", "www.link.com", "www.link.com"],
-      files: ["www.link.com", "www.link.com", "www.link.com"],
-      options: ["YES", "NO", "ABSTAIN"],
-      burnPercentage: 0.5,
-      burnAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
-      communityPercentage: 0.5,
-      communityAddress: "0x514910771af9ca656af840dff83e8264ecf986ca",
-    });
-
-  }, []);
+  }, [id, current]);
 
   useEffect(() => {
 
@@ -121,18 +81,21 @@ const ProposalComponent = () => {
       date.getFullYear()
     );
 
+    setClosingTime(parseInt(data.closes)*1000)
+
   }, [data]);
 
   useEffect(() => {
-    if (Date.now() > data.opens && Date.now() < data.closes) {
+    if (Date.now()/1000 > data.opens && Date.now()/1000 < data.closes) {
       setStatus(StatusType.ACTIVE);
-    } else if (Date.now() > data.closes) {
+    } else if (Date.now()/1000 > data.closes) {
       if (votes.yes > (votes.yes + votes.no + votes.abstain) / 2) {
         setStatus(StatusType.PASSED);
       } else if (votes.yes < (votes.yes + votes.no + votes.abstain) / 2) {
         setStatus(StatusType.FAILED);
       }
     }
+    
   }, []);
 
   return (
@@ -180,7 +143,7 @@ const ProposalComponent = () => {
                   </div>
                 </div>
                 <div className={styles.right}>
-                  <Timing closes={data.closes} />
+                  <Timing closes={Number(current.closes)} />
                 </div>
               </div>
 
@@ -221,7 +184,7 @@ const ProposalComponent = () => {
             <VotersList />
             <Contract
               contractAddress={data.contract}
-              link="https://google.com"
+              link={`${ExplorerUrl.Networks[chainId ? chainId : 50]}xdc${String(data.contract).slice(2, String(data.contract).length)}`} 
             />
           </div>
         </div>

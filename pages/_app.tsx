@@ -2,7 +2,10 @@ import type { AppProps } from "next/app";
 import { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import { PopupContext } from "../contexts/PopupContext";
-import Web3ModalProvider from "../contexts/web3modal";
+import ProposalsProvider from "../contexts/ProposalsContext";
+import Web3ModalProvider from "../contexts/Web3ModalProvider";
+import BlockchainProvider from "../contexts/BlockchainProvider";
+import StatusUpdater from "../contexts/StatusUpdater";
 import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -10,9 +13,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <Web3ModalProvider>
-      <PopupContext.Provider value={{ popup, setPopup }}>
-        <Component {...pageProps} />
-      </PopupContext.Provider>
+      <BlockchainProvider>
+        <PopupContext.Provider value={{ popup, setPopup }}>
+          <ProposalsProvider>
+            <StatusUpdater>
+              <Component {...pageProps} />
+            </StatusUpdater>
+          </ProposalsProvider>
+        </PopupContext.Provider>
+      </BlockchainProvider>
     </Web3ModalProvider>
   );
 }

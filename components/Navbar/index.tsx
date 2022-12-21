@@ -7,7 +7,7 @@ import logo from "../../public/assets/logo/votinglogo.svg";
 import styles from "./styles.module.scss";
 
 import { PopupContext } from "../../contexts/PopupContext";
-import { Web3ModalContext } from "../../contexts/web3modal";
+import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
 import { ellipseAddress } from "../../utils";
 
 const Navbar = () => {

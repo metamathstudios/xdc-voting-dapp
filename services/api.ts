@@ -103,3 +103,24 @@ export const fullTextSearch = async (query: string) => {
     }
 }
 
+export const getProposalsByTag = async (tag: string) => {
+
+    const config = {
+        method: 'get',
+        url: `${API_URL}/proposal/tags/${tag}`,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        maxRedirects: 0,
+    }
+
+    try {
+        const response = await axios(config)
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+

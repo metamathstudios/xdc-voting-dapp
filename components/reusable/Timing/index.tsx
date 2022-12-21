@@ -9,14 +9,16 @@ interface Status {
   closes: number;
 }
 
-const Timing: React.FC<Status> = (props: Status) => {
+const Timing = (props: Status) => {
   const [time, setTime] = useState("00:00:00");
 
   useEffect(() => {
     setInterval(() => {
-      setTime(toHHMMSS(props.closes - Date.now() / 1000));
+      const time = toHHMMSS(props.closes - (Date.now() / 1000))
+      if( time !== undefined && time !== `NaN:NaN:NaN`)
+      setTime(time);
     }, 1000);
-  }, []);
+  }, [time]);
 
   return (
     <div className={styles.container}>

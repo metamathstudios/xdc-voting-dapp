@@ -1,34 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Card from "../Card";
 import styles from "./styles.module.scss";
+import { ProposalsContext } from "../../../../contexts/ProposalsContext";
 
 const List = () => {
   const [data, setData] = useState<any>([]);
 
+  const { proposals, all, byId } = useContext(ProposalsContext);
+
   useEffect(() => {
-    setData([
-      {
-        title: "The title of the page",
-        tags: ["Core", "Treasury", "Urgent", "XDC Community"],
-        description:
-          "The description of the page \n\n This is a new line \n\n This is another new line",
-        contract: "0x514910771af9ca656af840dff83e8264ecf986ca",
-        id: 1,
-        creator: "0x514910771af9ca656af840dff83e8264ecf986ca",
-        created: 1670888393,
-        opens: 1670888393,
-        closes: 1670889353,
-        toll: 10,
-        urls: ["www.link.com", "www.link.com", "www.link.com"],
-        files: ["www.link.com", "www.link.com", "www.link.com"],
-        options: ["Yes", "No", "Abstain"],
-      },
-    ]);
-  }, []);
+    if(proposals && proposals.length === 0) {
+      const getData = async () => {
+        await all();
+      };
+      getData();
+    }
+    
+    setData(proposals);
+    
+    if(proposals.length > 0) {
+      byId(proposals.length);
+    }
+  }, [proposals]);
 
   return (
     <div className={styles.listContainer}>
-      {data.map((value, index) => {
+      {data?.map((value, index) => {
         return <Card key={index} data={data[index]} />;
       })}
     </div>

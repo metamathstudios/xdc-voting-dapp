@@ -13,6 +13,7 @@ interface CardType {
     tags: [string];
     description: string;
     contract: string;
+    proposal: number;
     id: number;
     creator: string;
     created: number;
@@ -46,9 +47,9 @@ const Card: React.FC<CardType> = (props: CardType) => {
   });
 
   useEffect(() => {
-    if (Date.now() > props.data.opens && Date.now() < props.data.closes) {
+    if (Date.now()/1000 > props.data.opens && Date.now()/1000 < props.data.closes) {
       setStatus(StatusType.ACTIVE);
-    } else if (Date.now() > props.data.closes) {
+    } else if (Date.now()/1000 > props.data.closes) {
       if (votes.yes > votes.yes + votes.no + votes.abstain / 2) {
         setStatus(StatusType.PASSED);
       } else if (votes.yes < votes.yes + votes.no + votes.abstain / 2) {
@@ -60,7 +61,7 @@ const Card: React.FC<CardType> = (props: CardType) => {
   return (
     <div
       className={styles.container}
-      onClick={() => route.push("/proposal/" + props.data.id)}
+      onClick={() => route.push("/proposal/" + props.data.proposal)}
     >
       <div className={styles.header}>
         <div className={styles.left}>
@@ -76,7 +77,7 @@ const Card: React.FC<CardType> = (props: CardType) => {
 
       <div className={styles.content}>
         <div className={styles.title}>{props.data.title}</div>
-        <div className={styles.description}>{props.data.description}</div>
+        <div className={styles.description}>{`${props.data.description.slice(0, 256)}...`}</div>
       </div>
 
       <div className={styles.tagList}>

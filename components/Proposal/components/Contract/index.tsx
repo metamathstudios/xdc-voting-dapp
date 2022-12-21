@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import invertedShare from "../../../../public/assets/svgicons/invertedShare.svg";
 import { ellipseAddress } from "../../../../utils";
+
 import styles from "./styles.module.scss";
 
 interface ContractType {
