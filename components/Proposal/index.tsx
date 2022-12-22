@@ -16,6 +16,7 @@ import styles from "./styles.module.scss";
 import { ProposalsContext } from "../../contexts/ProposalsContext";
 import { ExplorerUrl } from "../../blockchain/constants";
 import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
+import { NotificationManager } from "react-notifications";
 
 interface Votes {
   yes: number;
@@ -123,7 +124,10 @@ const ProposalComponent = () => {
                   <div className={styles.text}>Edit</div>
                 </div>
 
-                <div className={styles.publish}>
+                <div 
+                className={styles.publish}
+                onClick={() => NotificationManager.error("Beta Test Notification: This feature is not available yet!")}
+                >
                   <div className={styles.image}>
                     <Image src={publish} alt="Publish" width={16} />
                   </div>

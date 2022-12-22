@@ -7,6 +7,8 @@ import Web3ModalProvider from "../contexts/Web3ModalProvider";
 import BlockchainProvider from "../contexts/BlockchainProvider";
 import StatusUpdater from "../contexts/StatusUpdater";
 import { Theme, ThemeContext } from "../contexts/ThemeContext";
+import { NotificationContainer } from "react-notifications";
+import 'react-notifications/lib/notifications.css';
 import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -21,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <ProposalsProvider>
               <StatusUpdater>
                 <Component {...pageProps} />
+                <NotificationContainer />
               </StatusUpdater>
             </ProposalsProvider>
           </PopupContext.Provider>

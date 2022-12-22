@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
+import { NotificationManager } from "react-notifications";
 import Slider from "@mui/material/Slider";
 import "@uiw/react-markdown-preview/markdown.css";
 import "@uiw/react-md-editor/markdown-editor.css";
@@ -81,7 +82,8 @@ const ProposalEditorComponent = () => {
             </div>
 
             <div className={styles.rightContainer}>
-              <div className={styles.preview} onClick={() => router.push("/preview")}>
+              {/* <div className={styles.preview} onClick={() => router.push("/preview")}> */}
+              <div className={styles.preview} onClick={() => NotificationManager.error("Beta Test Notification: This feature is not available yet!")}>
                 <div className={styles.image}>
                   <Image
                     src={theme == Theme.DARK ? preview : preview}
@@ -92,7 +94,7 @@ const ProposalEditorComponent = () => {
                 <div className={styles.text}>Preview</div>
               </div>
 
-              <div className={styles.publish}>
+              <div className={styles.publish} onClick={() => NotificationManager.error("Beta Test Notification: This feature is not available yet!")}>
                 <div className={styles.image}>
                   <Image
                     src={theme == Theme.DARK ? publish : publish}
