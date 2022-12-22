@@ -1,14 +1,29 @@
+.dark {
+  .container {
+    border: 1px solid rgba(45, 45, 45, 1);
+
+    .image {
+      filter: brightness(100);
+    }
+
+    span {
+      color: white;
+    }
+  }
+}
+
 .container {
   max-width: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid rgba(217, 217, 217, 1);
+  border: 1px solid rgba(217, 217, 217, 1);
   padding: 15px;
   border-radius: 10px;
   cursor: pointer;
   margin: 10px;
   margin-right: 0px;
+  transition: 0.3s;
 
   span {
     margin-left: 7px;
@@ -17,8 +32,15 @@
   }
 
   &:hover {
-    background-color: white;
-    outline: 1px solid var(--darkblue);
-    color: var(--darkblue);
+    background-color: rgba(32, 73, 185, 1);
+    transition: all ease-in-out 0.5s;
+
+    span {
+      color: white;
+    }
+
+    .image {
+      filter: brightness(100);
+    }
   }
 }

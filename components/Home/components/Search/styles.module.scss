@@ -2,6 +2,12 @@
   .container {
     .bordered {
       border-color: rgba(45, 45, 45, 1) !important;
+
+      .input {
+        input {
+          color: white;
+        }
+      }
     }
 
     .dropdownContainer {

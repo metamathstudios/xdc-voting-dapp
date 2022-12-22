@@ -15,6 +15,7 @@ const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
 import { useRouter } from "next/router";
 import { Theme, ThemeContext } from "../../contexts/ThemeContext";
+import Button from "../reusable/Button";
 import back from "./assets/back.svg";
 import less from "./assets/less.svg";
 import more from "./assets/more.svg";
@@ -81,27 +82,12 @@ const ProposalEditorComponent = () => {
             </div>
 
             <div className={styles.rightContainer}>
-              <div className={styles.preview} onClick={() => router.push("/preview")}>
-                <div className={styles.image}>
-                  <Image
-                    src={theme == Theme.DARK ? preview : preview}
-                    alt="Preview"
-                  />
-                </div>
-
-                <div className={styles.text}>Preview</div>
+              <div onClick={() => router.push("/preview")}>
+                <Button icon={preview} text="Preview" />
               </div>
 
-              <div className={styles.publish}>
-                <div className={styles.image}>
-                  <Image
-                    src={theme == Theme.DARK ? publish : publish}
-                    alt="Publish"
-                    width={16}
-                  />
-                </div>
-
-                <div className={styles.text}>Publish</div>
+              <div onClick={() => console.log("Publish")}>
+                <Button icon={publish} text="Publish" />
               </div>
             </div>
           </div>

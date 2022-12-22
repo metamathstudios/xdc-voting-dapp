@@ -1,21 +1,22 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ExplorerUrl } from "../../blockchain/constants";
+import { ProposalsContext } from "../../contexts/ProposalsContext";
 import { Theme, ThemeContext } from "../../contexts/ThemeContext";
+import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
 import { default as back } from "../../public/assets/svgicons/backArrow.svg";
 import edit from "../../public/assets/svgicons/edit.svg";
 import publish from "../../public/assets/svgicons/publish.svg";
 import share from "../../public/assets/svgicons/share.svg";
 import { ellipseAddress } from "../../utils";
+import Button from "../reusable/Button";
 import Status, { StatusType } from "../reusable/Status";
 import Contract from "./components/Contract";
 import Results from "./components/Results";
 import VoteCard from "./components/VoteCard";
 import VotersList from "./components/VotersList";
 import styles from "./styles.module.scss";
-import { ProposalsContext } from "../../contexts/ProposalsContext";
-import { ExplorerUrl } from "../../blockchain/constants";
-import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
 
 interface Votes {
   yes: number;
@@ -44,15 +45,13 @@ const ProposalComponent = () => {
   const id = parseInt(route.asPath.split("/")[2]);
 
   useEffect(() => {
-
     if (id && current?.proposal !== id) {
       const getData = async () => {
-        await byId(id)
-      }
+        await byId(id);
+      };
       getData();
     }
     setData(current);
-
   }, [id, current]);
 
   useEffect(() => {
@@ -75,14 +74,13 @@ const ProposalComponent = () => {
 
     setPostedOn(
       date.getDate() +
-      " - " +
-      months[date.getMonth()] +
-      " " +
-      date.getFullYear()
+        " - " +
+        months[date.getMonth()] +
+        " " +
+        date.getFullYear()
     );
 
-    setClosingTime(parseInt(data.closes) * 1000)
-
+    setClosingTime(parseInt(data.closes) * 1000);
   }, [data]);
 
   useEffect(() => {
@@ -95,7 +93,6 @@ const ProposalComponent = () => {
         setStatus(StatusType.FAILED);
       }
     }
-
   }, []);
 
   return (
@@ -112,44 +109,29 @@ const ProposalComponent = () => {
             </div>
             {route.pathname === "/preview" ? (
               <div className={styles.rightContainer}>
-                <div
-                  className={styles.edit}
-                  onClick={() => route.push("/editor")}
-                >
-                  <div className={styles.image}>
-                    <Image src={edit} alt="Edit" />
-                  </div>
-
-                  <div className={styles.text}>Edit</div>
+                <div onClick={() => route.push("/editor")}>
+                  <Button icon={edit} text="Edit" />
                 </div>
 
-                <div className={styles.publish}>
-                  <div className={styles.image}>
-                    <Image src={publish} alt="Publish" width={16} />
-                  </div>
-
-                  <div className={styles.text}>Publish</div>
-                </div >
-              </div >
+                <div onClick={() => console.log("Publish")}>
+                  <Button icon={publish} text="Publish" />
+                </div>
+              </div>
             ) : (
               <></>
             )}
-          </div >
+          </div>
           <div className={styles.wrapper}>
             <div className={styles.content}>
               <div className={styles.header}>
                 <div className={styles.top}>
-                
                   <div className={styles.left}>
-                  
                     <div className={styles.icon} />
                     <div className={styles.walletId}>
                       {ellipseAddress(data.creator)}
                     </div>
                     <div className={styles.postDate}>Posted on {postedOn}</div>
                   </div>
-
-                  
 
                   <div className={styles.title}>{data.title}</div>
 
@@ -188,7 +170,12 @@ const ProposalComponent = () => {
                 <VotersList />
                 <Contract
                   contractAddress={data.contract}
-                  link={`${ExplorerUrl.Networks[chainId ? chainId : 50]}xdc${String(data.contract).slice(2, String(data.contract).length)}`}
+                  link={`${
+                    ExplorerUrl.Networks[chainId ? chainId : 50]
+                  }xdc${String(data.contract).slice(
+                    2,
+                    String(data.contract).length
+                  )}`}
                 />
               </div>
             </div>
