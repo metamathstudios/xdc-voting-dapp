@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import BlockchainProvider from "../contexts/BlockchainProvider";
-import { PopupContext } from "../contexts/popupContext";
+import { PopupContext } from "../contexts/PopupContext";
 import ProposalsProvider from "../contexts/ProposalsContext";
 import StatusUpdater from "../contexts/StatusUpdater";
 import { Theme, ThemeContext } from "../contexts/ThemeContext";
