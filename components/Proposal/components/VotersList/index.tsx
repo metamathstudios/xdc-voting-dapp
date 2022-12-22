@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Theme, ThemeContext } from "../../../../contexts/themeContext";
+import { Theme, ThemeContext } from "../../../../contexts/ThemeContext";
 import UserRow from "./components/UserRow";
 import VotersPopup from "./components/VotersPopup";
 import styles from "./styles.module.scss";

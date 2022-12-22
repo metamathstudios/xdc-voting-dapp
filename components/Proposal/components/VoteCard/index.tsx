@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Theme, ThemeContext } from "../../../../contexts/themeContext";
+import { Theme, ThemeContext } from "../../../../contexts/ThemeContext";
 import { getAllProposals } from "../../../../services/api";
 import styles from "./styles.module.scss";
 

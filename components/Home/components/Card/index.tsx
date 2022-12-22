@@ -1,7 +1,7 @@
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { Theme, ThemeContext } from "../../../../contexts/themeContext";
+import { Theme, ThemeContext } from "../../../../contexts/ThemeContext";
 import like from "../../../../public/assets/svgicons/like.svg";
 import whiteLike from "../../../../public/assets/svgicons/whiteLike.svg";
 import { ellipseAddress, getPercentage } from "../../../../utils";

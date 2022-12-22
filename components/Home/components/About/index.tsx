@@ -1,4 +1,4 @@
-import { Theme, ThemeContext } from "../../../../contexts/themeContext";
+import { Theme, ThemeContext } from "../../../../contexts/ThemeContext";
 import lightLogo from "../../../../public/assets/logo/smallLightLogo.svg";
 import Logo from "../../../../public/assets/logo/xdc-community.png";
 import Discord from "../../../../public/assets/socialmedia/discord.svg";

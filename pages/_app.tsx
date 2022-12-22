@@ -6,7 +6,7 @@ import ProposalsProvider from "../contexts/ProposalsContext";
 import Web3ModalProvider from "../contexts/Web3ModalProvider";
 import BlockchainProvider from "../contexts/BlockchainProvider";
 import StatusUpdater from "../contexts/StatusUpdater";
-import { Theme, ThemeContext } from "../contexts/themeContext";
+import { Theme, ThemeContext } from "../contexts/ThemeContext";
 import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }: AppProps) {

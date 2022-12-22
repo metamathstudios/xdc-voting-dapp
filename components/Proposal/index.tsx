@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState, useContext } from "react";
-import { Theme, ThemeContext } from "../../contexts/themeContext";
+import { Theme, ThemeContext } from "../../contexts/ThemeContext";
 import { default as back } from "../../public/assets/svgicons/backArrow.svg";
 import edit from "../../public/assets/svgicons/edit.svg";
 import publish from "../../public/assets/svgicons/publish.svg";

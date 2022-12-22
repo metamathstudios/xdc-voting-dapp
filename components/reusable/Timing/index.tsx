@@ -4,7 +4,7 @@ import clock from "../../../public/assets/svgicons/clock.svg";
 import clockEndend from "../../../public/assets/svgicons/clockEndend.svg";
 import { toHHMMSS } from "../../../utils";
 import styles from "./styles.module.scss";
-import { Theme, ThemeContext } from "../../../contexts/themeContext";
+import { Theme, ThemeContext } from "../../../contexts/ThemeContext";
 
 interface Status {
   closes: number;

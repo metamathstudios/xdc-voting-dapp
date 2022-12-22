@@ -1,6 +1,6 @@
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useContext } from "react";
-import { Theme, ThemeContext } from "../../../../contexts/themeContext";
+import { Theme, ThemeContext } from "../../../../contexts/ThemeContext";
 import { getPercentage } from "../../../../utils";
 import styles from "./styles.module.scss";
 

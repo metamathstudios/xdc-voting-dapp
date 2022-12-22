@@ -14,7 +14,7 @@ import LinkInputRemovable from "./components/LinkInputRemovable";
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
 import { useRouter } from "next/router";
-import { Theme, ThemeContext } from "../../contexts/themeContext";
+import { Theme, ThemeContext } from "../../contexts/ThemeContext";
 import back from "./assets/back.svg";
 import less from "./assets/less.svg";
 import more from "./assets/more.svg";
