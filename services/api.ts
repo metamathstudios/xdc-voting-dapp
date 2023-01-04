@@ -34,7 +34,6 @@ export const createProposal = async (proposal: Proposal) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        maxRedirects: 0,
         data: JSON.stringify(proposal),
     }
 
@@ -54,7 +53,6 @@ export const getAllProposals = async () => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        maxRedirects: 0,
     }
 
     try {
@@ -73,7 +71,6 @@ export const getProposal = async (id: number) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        maxRedirects: 0,
     }
 
     try {
@@ -92,7 +89,6 @@ export const fullTextSearch = async (query: string) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        maxRedirects: 0,
     }
 
     try {
@@ -112,7 +108,6 @@ export const getProposalsByTag = async (tag: string) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        maxRedirects: 0,
     }
 
     try {
