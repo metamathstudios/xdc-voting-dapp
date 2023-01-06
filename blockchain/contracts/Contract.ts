@@ -25,7 +25,7 @@ class Contract {
   
   call(method, ...params) {
     return new Promise((resolve, reject) => {
-      this.contract.methods[method](...params)?.call({from: this.account})
+      this.contract.methods[method](...params).call({from: this.account})
         .then(resolve)
         .catch(reject)
     });
