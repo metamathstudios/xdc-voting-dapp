@@ -19,6 +19,7 @@ import { Theme, ThemeContext } from "../../contexts/ThemeContext";
 import { PreviewContext } from "../../contexts/PreviewContext";
 import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
 import { BlockchainContext } from "../../contexts/BlockchainProvider";
+import { ProposalsContext } from "../../contexts/ProposalsContext";
 import { generateHexString } from "../../utils";
 import { createProposal } from "../../services/api";
 import { VotingHubAddress } from "../../blockchain/constants";
@@ -38,6 +39,7 @@ const ProposalEditorComponent = () => {
   const { value, setValue, title, setTitle, startDate, setStartDate, endDate, setEndDate, toll, setToll, approvalThreshold, setApprovalThreshold, tags, setTags } = useContext(PreviewContext);
   const { account, chainId } = useContext(Web3ModalContext);
   const { votingHub } = useContext(BlockchainContext);
+  const { all } = useContext(ProposalsContext);
 
   const [renderNumberLink, setRenderNumberLink] = useState(0);
   const [renderNumberImage, setRenderNumberImage] = useState(0);
@@ -167,8 +169,10 @@ const ProposalEditorComponent = () => {
                         }).then((res: any) => {
                           if(res.status === 201) {
                             setCurrentMessage("Proposal successfully published. Please wait...")
+                            
                             setTimeout(() => {
                               router.push("/")
+                              all()
                             }, 1000)
                           }
                       })

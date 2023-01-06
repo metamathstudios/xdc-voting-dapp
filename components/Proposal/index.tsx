@@ -175,9 +175,9 @@ const ProposalComponent = () => {
                   <Button icon={edit} text="Edit" />
                 </div>
 
-                <div onClick={() => NotificationManager.error("Beta Test Notification: This feature is not available yet!")}>
+                {/* <div onClick={() => NotificationManager.error("Beta Test Notification: This feature is not available yet!")}>
                   <Button icon={publish} text="Publish" />
-                </div>
+                </div> */}
               </div>
             ) : (
               <></>
