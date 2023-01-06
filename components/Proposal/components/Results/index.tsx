@@ -5,15 +5,23 @@ import { getPercentage } from "../../../../utils";
 import styles from "./styles.module.scss";
 
 interface ResultsType {
-  votes: {
-    yes: number;
-    no: number;
-    abstain: number;
-  };
+  data: any;
 }
+
+type votes = {
+  yes: number;
+  no: number;
+  abstain: number;
+};
 
 const Results: React.FC<ResultsType> = (props: ResultsType) => {
   const { theme } = useContext(ThemeContext);
+
+  const votes: votes = {
+    yes: props.data.forVotes,
+    no: props.data.againstVotes,
+    abstain: props.data.nullVotes,
+  };
 
   return (
     <div className={theme == Theme.DARK ? styles.dark : styles.light}>
@@ -25,18 +33,18 @@ const Results: React.FC<ResultsType> = (props: ResultsType) => {
             <div className={styles.text}>
               <div className={styles.left}>Yes</div>
               <div className={styles.right}>
-                {props.votes.yes} -{" "}
-                {getPercentage(
-                  props.votes.yes,
-                  props.votes.yes + props.votes.no + props.votes.abstain
-                ) + "%"}
+                {votes.yes} -{" "}
+                {Number(votes.yes).toString() !== 'NaN' ? getPercentage(
+                Number(votes.yes),
+                Number(votes.yes) + Number(votes.no) + Number(votes.abstain)
+              ) + "%" : "0%"}
               </div>
             </div>
             <ProgressBar
-              completed={getPercentage(
-                props.votes.yes,
-                props.votes.yes + props.votes.no + props.votes.abstain
-              )}
+              completed={Number(votes.yes).toString() !== 'NaN' ? getPercentage(
+                Number(votes.yes),
+                Number(votes.yes) + Number(votes.no) + Number(votes.abstain)
+              ) : 0}
               className={styles.loading}
               bgColor="#78D681"
               baseBgColor={theme == Theme.DARK ? "#2D2D2D" : "#e0e0de"}
@@ -49,18 +57,18 @@ const Results: React.FC<ResultsType> = (props: ResultsType) => {
             <div className={styles.text}>
               <div className={styles.left}>No</div>
               <div className={styles.right}>
-                {props.votes.no} -{" "}
-                {getPercentage(
-                  props.votes.no,
-                  props.votes.yes + props.votes.no + props.votes.abstain
-                ) + "%"}
+                {votes.no} -{" "}
+                {Number(votes.yes).toString() !== 'NaN' ? getPercentage(
+                  Number(votes.no),
+                  Number(votes.yes) + Number(votes.no) + Number(votes.abstain)
+                ) + "%" : "0%"}
               </div>
             </div>
             <ProgressBar
-              completed={getPercentage(
-                props.votes.no,
-                props.votes.yes + props.votes.no + props.votes.abstain
-              )}
+              completed={Number(votes.yes).toString() !== 'NaN' ? getPercentage(
+                Number(votes.no),
+                Number(votes.yes) + Number(votes.no) + Number(votes.abstain)
+              ) : 0}
               className={styles.loading}
               baseBgColor={theme == Theme.DARK ? "#2D2D2D" : "#e0e0de"}
               bgColor="#FF6969"
@@ -73,18 +81,18 @@ const Results: React.FC<ResultsType> = (props: ResultsType) => {
             <div className={styles.text}>
               <div className={styles.left}>Abstain</div>
               <div className={styles.right}>
-                {props.votes.abstain} -{" "}
-                {getPercentage(
-                  props.votes.abstain,
-                  props.votes.yes + props.votes.no + props.votes.abstain
-                ) + "%"}
+                {votes.abstain} -{" "}
+                {Number(votes.yes).toString() !== 'NaN' ? getPercentage(
+                Number(votes.abstain),
+                Number(votes.yes) + Number(votes.no) + Number(votes.abstain)
+              ) + "%" : "0%"}
               </div>
             </div>
             <ProgressBar
-              completed={getPercentage(
-                props.votes.abstain,
-                props.votes.yes + props.votes.no + props.votes.abstain
-              )}
+              completed={Number(votes.yes).toString() !== 'NaN' ? getPercentage(
+                Number(votes.abstain),
+                Number(votes.yes) + Number(votes.no) + Number(votes.abstain)
+              ) : 0}
               className={styles.loading}
               baseBgColor={theme == Theme.DARK ? "#2D2D2D" : "#e0e0de"}
               bgColor="#5C82E8"

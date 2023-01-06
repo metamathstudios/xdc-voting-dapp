@@ -66,7 +66,7 @@ const Search = () => {
             />
           </div>
         </div>
-        {/*         {account && ( */}
+        {account && (
         <div
           style={
             tag == "XDC Community"
@@ -79,7 +79,7 @@ const Search = () => {
         >
           <Button icon={newicon} text="New Proposal" />
         </div>
-        {/*         )} */}
+        )}
 
         <div
           className={styles.dropdownContainer}

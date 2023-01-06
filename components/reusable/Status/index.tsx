@@ -5,6 +5,7 @@ export enum StatusType {
   ACTIVE,
   FAILED,
   PASSED,
+  INACTIVE,
 }
 
 interface Status {
@@ -25,6 +26,9 @@ const Status: React.FC<Status> = (props: Status) => {
       case StatusType.PASSED:
         bg = "#78D681";
         break;
+      case StatusType.INACTIVE:
+        bg = "rgb(100 100 100)";
+        break;
     }
 
     return bg;
@@ -38,6 +42,7 @@ const Status: React.FC<Status> = (props: Status) => {
       {props.status === StatusType.ACTIVE && <span>Active</span>}
       {props.status === StatusType.FAILED && <span>Failed</span>}
       {props.status === StatusType.PASSED && <span>Passed</span>}
+      {props.status === StatusType.INACTIVE && <span>Inactive</span>}
     </div>
   );
 };

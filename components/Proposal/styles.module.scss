@@ -48,7 +48,7 @@
 
       .infos {
         .text {
-          color: rgba(188, 188, 188, 1);
+          color: rgb(255, 255, 255);
         }
       }
     }
@@ -270,6 +270,7 @@
         display: flex;
         text-align: justify;
         flex-direction: column;
+        max-width: 720px;
 
         .links {
           display: flex;
@@ -300,7 +301,7 @@
         max-width: 350px;
         display: flex;
         align-items: flex-end;
-        justify-content: center;
+        justify-content: top;
         flex-direction: column;
       }
     }

@@ -10,6 +10,7 @@ import { NotificationContainer } from "react-notifications";
 import 'react-notifications/lib/notifications.css';
 import Web3ModalProvider from "../contexts/Web3ModalProvider";
 import "../styles/globals.scss";
+import PreviewProvider, { PreviewContext } from "../contexts/PreviewContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [popup, setPopup] = useState(false);
@@ -30,7 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
           <PopupContext.Provider value={{ popup, setPopup }}>
             <ProposalsProvider>
               <StatusUpdater>
-                <Component {...pageProps} />
+                <PreviewProvider>
+                  <Component {...pageProps} />
+                </PreviewProvider>
                 <NotificationContainer />
               </StatusUpdater>
             </ProposalsProvider>

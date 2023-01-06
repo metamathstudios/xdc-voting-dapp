@@ -7,7 +7,6 @@ import styles from "./styles.module.scss";
 
 const TermsPopup = () => {
   const [canConnect, setCanConnect] = useState(false);
-
   const { popup, setPopup } = useContext(PopupContext);
   const { connect } = useContext(Web3ModalContext);
 
@@ -50,7 +49,7 @@ const TermsPopup = () => {
 
             <div className={styles.content}>
               <div className={styles.title}>Terms of Use</div>
-              <div className={styles.subTitle}>Update Abril 2020</div>
+              <div className={styles.subTitle}>Update Dec 2022</div>
               <div className={styles.description}>
                 <strong>Information Published on the Website</strong>
                 <br />

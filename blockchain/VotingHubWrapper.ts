@@ -42,7 +42,7 @@ export default class VotingHubWrapper {
 
     async castVote(proposalId, vote, toll) {
         try{
-            const result = await this.Contract.send("castVote", {from: this.account , value: this.web3.utils.toWei(toll, 'ether')}, proposalId, vote);
+            const result = await this.Contract.send("castVote", {from: this.account , value: toll}, proposalId, vote);
             return result;
         } catch (e) {
             throw e;
@@ -51,10 +51,29 @@ export default class VotingHubWrapper {
 
     async abstainVote(proposalId, toll) {
         try{
-            const result = await this.Contract.send("castVote", {from: this.account , value: this.web3.utils.toWei(toll, 'ether')}, proposalId);
+            const result = await this.Contract.send("castVote", {from: this.account , value: toll}, proposalId);
             return result;
         } catch (e) {
             throw e;
         }
     }
+
+    async votingReceipt(proposalId, account) {
+        try{
+            const result = await this.Contract.call("receipts", account, Number(proposalId));
+            return result;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getProposal(proposalId) {
+        try{
+            const result = await this.Contract.call("proposals", proposalId);
+            return result;
+        } catch (e) {
+            throw e;
+        }
+    }
+    
 }

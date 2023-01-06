@@ -1,3 +1,6 @@
+import { ethers } from "ethers";
+import Artifacts from "./../blockchain/contracts/VotingHubV1.json"
+
 export function ellipseAddress(
   address: string = "",
   width: number = 4
@@ -17,7 +20,7 @@ export function toHHMMSS(secs) {
 }
 
 export function getPercentage(num, total) {
-  return ((num / total) * 100).toFixed(0);
+  return ((num / total) * 100).toFixed(2);
 }
 
 export function generateHexString ( length: number ): string {
@@ -39,4 +42,23 @@ export function generateHexString ( length: number ): string {
     ret += Math.random().toString(16).substring(2)
   }
   return ret.substring(0, length)
+}
+
+export async function fetchVotes ( _proposalId: string, _hubAddress: string, _rpcEndpoint: string, _deploymentBlock: number) {
+  const provider = new ethers.providers.JsonRpcProvider(_rpcEndpoint);
+    const contract = new ethers.Contract(_hubAddress, Artifacts["abi"], provider);
+    const voteEventFilter = contract.filters.VoteCast(null, null, null, null);
+    const votes = await contract.queryFilter(voteEventFilter, _deploymentBlock, "latest");
+
+    const votesById = votes.reduce((acc, vote) => {
+      // @ts-ignore
+        const { proposalId, voter, voterChoice } = vote.args;
+        if (!acc[proposalId]) {
+            acc[proposalId] = [];
+        }
+        acc[proposalId].push({ voter, voterChoice });
+        return acc;
+    }, {});
+
+    return votesById[_proposalId];
 }

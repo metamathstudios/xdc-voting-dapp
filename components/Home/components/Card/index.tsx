@@ -6,6 +6,9 @@ import like from "../../../../public/assets/svgicons/like.svg";
 import whiteLike from "../../../../public/assets/svgicons/whiteLike.svg";
 import { ellipseAddress, getPercentage } from "../../../../utils";
 import Status, { StatusType } from "../../../reusable/Status";
+import { BlockchainContext } from "../../../../contexts/BlockchainProvider";
+import { Web3ModalContext } from "../../../../contexts/Web3ModalProvider";
+import { StatusContext } from "../../../../contexts/StatusUpdater";
 import Timing from "../../../reusable/Timing";
 import styles from "./styles.module.scss";
 
@@ -42,25 +45,75 @@ const Card: React.FC<CardType> = (props: CardType) => {
   const route = useRouter();
 
   const { theme } = useContext(ThemeContext);
-
-  const [status, setStatus] = useState<StatusType>(StatusType.ACTIVE);
-  const [votes, setVotes] = useState<Votes>({
-    yes: 14,
-    no: 9,
+  const { web3, account } = useContext(Web3ModalContext);
+  const { votingHub: VotingHubWrapper } = useContext(BlockchainContext);
+  const { statusUpdated, setStatusUpdated } = useContext(StatusContext);
+  const [ status, setStatus ] = useState<StatusType>(StatusType.INACTIVE);
+  const [ votes, setVotes ] = useState<Votes>({
+    yes: 0,
+    no: 0,
     abstain: 0,
   });
+  const [ passingPercentage, setPassingPercentage ] = useState<number>(0);
+  const [ voted, setVoted ] = useState<boolean>(false);
 
   useEffect(() => {
-    if (Date.now()/1000 > props.data.opens && Date.now()/1000 < props.data.closes) {
+    if (!web3 || !account) return;
+    setStatusUpdated(!statusUpdated);
+  }, [web3, account])
+
+
+  useEffect(() => {
+    if (!web3 || !account) return;
+    VotingHubWrapper?.getProposal(props.data.proposal).then((res) => {
+      if (!res) return;
+      setVotes({
+        yes: parseInt(res[7]),
+        no: parseInt(res[8]),
+        abstain: parseInt(res[9]),
+      });
+      setPassingPercentage(
+        parseInt(res[6])/100
+      );
+    });
+
+    if (Date.now() / 1000 > props.data.opens && Date.now() / 1000 < props.data.closes) {
       setStatus(StatusType.ACTIVE);
-    } else if (Date.now()/1000 > props.data.closes) {
+    } else if (Date.now() / 1000 > props.data.closes) {
+      if (votes.yes / ( votes.yes + votes.no ) >= passingPercentage) {
+        setStatus(StatusType.PASSED);
+      } else if (votes.yes / ( votes.yes + votes.no ) < passingPercentage) {
+        setStatus(StatusType.FAILED);
+      }
+    }
+  }, [votes]);
+
+  useEffect(() => {
+    if (!web3 || !account) return;
+    VotingHubWrapper?.getProposal(props.data.proposal).then((res) => {
+      if (!res) return;
+      setVotes({
+        yes: parseInt(res[7]),
+        no: parseInt(res[8]),
+        abstain: parseInt(res[9]),
+      });
+    });
+
+    VotingHubWrapper?.votingReceipt(props.data.proposal, account).then((res) => {
+      if (!res) return;
+      setVoted(res[0])
+    });
+
+    if (Date.now() / 1000 > props.data.opens && Date.now() / 1000 < props.data.closes) {
+      setStatus(StatusType.ACTIVE);
+    } else if (Date.now() / 1000 > props.data.closes) {
       if (votes.yes > votes.yes + votes.no + votes.abstain / 2) {
         setStatus(StatusType.PASSED);
       } else if (votes.yes < votes.yes + votes.no + votes.abstain / 2) {
         setStatus(StatusType.FAILED);
       }
     }
-  }, []);
+  }, [statusUpdated]);
 
   return (
     <div className={theme == Theme.DARK ? styles.dark : styles.light}>
@@ -80,10 +133,10 @@ const Card: React.FC<CardType> = (props: CardType) => {
           </div>
         </div>
 
-      <div className={styles.content}>
-        <div className={styles.title}>{props.data.title}</div>
-        <div className={styles.description}>{`${props.data.description.slice(0, 256)}...`}</div>
-      </div>
+        <div className={styles.content}>
+          <div className={styles.title}>{props.data.title}</div>
+          <div className={styles.description}>{`${props.data.description.slice(0, 256)}...`}</div>
+        </div>
         <div className={styles.tagList}>
           {props.data.tags.slice(0, 4).map((value, index) => {
             return (
@@ -101,10 +154,10 @@ const Card: React.FC<CardType> = (props: CardType) => {
           </div>
           <div className={styles.middle}>
             <ProgressBar
-              completed={getPercentage(
+              completed={votes ? getPercentage(
                 votes.yes,
                 votes.yes + votes.no + votes.abstain
-              )}
+              ) : 100}
               className={styles.loading}
               isLabelVisible={false}
               bgColor="#78D681"
@@ -113,10 +166,10 @@ const Card: React.FC<CardType> = (props: CardType) => {
             />
           </div>
           <div className={styles.right}>
-            <img
+            { voted ? <img
               src={theme == Theme.DARK ? whiteLike.src : like.src}
               alt="Vote"
-            />
+            /> : <> </> }
             <div className={styles.text}>
               Votes: {votes.yes + votes.no + votes.abstain}
             </div>

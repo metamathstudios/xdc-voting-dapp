@@ -4,10 +4,16 @@ export const VotingHubAddress = {
     }
 };
 
+export const DeploymentBlock = {
+    Networks: {
+        51: 42807132,
+    }
+}
+
 export const RpcEndpoint = {
     Networks: {
         50: "https://erpc.xinfin.network",
-        51: "https://erpc.apothen.network",
+        51: "https://erpc.apothem.network",
     }
 };
 

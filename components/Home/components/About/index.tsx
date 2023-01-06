@@ -40,7 +40,6 @@ const About = () => {
 
     VotingHubWrapper?.totalTollBurned().then(
       (value) => {
-        console.log(value)
         value ? setTotalXDCBurned(Number(value) / 10 ** 18) : setTotalXDCBurned(0);
       }
     );

@@ -20,7 +20,7 @@ const UserRow = ({ name, date }: data) => {
           <div className={styles.name}>{name}</div>
         </div>
 
-        <div className={styles.dateContainer}>{date} ago</div>
+        <div className={styles.dateContainer}>{date}</div>
       </div>
     </div>
   );

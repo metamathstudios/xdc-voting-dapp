@@ -16,6 +16,7 @@ const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
 import { useRouter } from "next/router";
 import { Theme, ThemeContext } from "../../contexts/ThemeContext";
+import { PreviewContext } from "../../contexts/PreviewContext";
 import Button from "../reusable/Button";
 import back from "./assets/back.svg";
 import less from "./assets/less.svg";
@@ -27,14 +28,14 @@ const ProposalEditorComponent = () => {
   const { theme } = useContext(ThemeContext);
 
   const router = useRouter();
+  const { value, setValue, title, setTitle, startDate, setStartDate, endDate, setEndDate, toll, setToll, approvalThreshold, setApprovalThreshold, setTags } = useContext(PreviewContext);
 
-  const [value, setValue] = useState("# XDC Proposal Editor");
   const [renderNumberLink, setRenderNumberLink] = useState(0);
   const [renderNumberImage, setRenderNumberImage] = useState(0);
   const [dropdown, setDropdown] = useState(true);
   const [treasury, setTreasury] = useState(false);
-  const [core, setCore] = useState(true);
-  const [xdc, setXdc] = useState(false);
+  const [core, setCore] = useState(false);
+  const [xdc, setXdc] = useState(true);
   const [urgent, setUrgent] = useState(false);
 
   const handleRenderNumberLink = () => {
@@ -63,6 +64,9 @@ const ProposalEditorComponent = () => {
     } else {
       setDropdown(true);
     }
+    let tags = [core ? "CORE" : "", treasury ? "TREASURY" : "", xdc ? "XDC_COMMUNITY" : "", urgent ? "URGENT" : ""];
+    tags = tags.filter((tag) => tag !== "");
+    setTags(tags)
   }, [core, treasury, xdc, urgent]);
 
   return (
@@ -83,7 +87,7 @@ const ProposalEditorComponent = () => {
             </div>
 
             <div className={styles.rightContainer}>
-              <div onClick={() => NotificationManager.error("Beta Test Notification: This feature is not available yet!")}>
+              <div onClick={() => router.push("/preview")}>
                 <Button icon={preview} text="Preview" />
               </div>
 
@@ -98,7 +102,7 @@ const ProposalEditorComponent = () => {
               <div className={styles.label}>Title</div>
 
               <div className={styles.input}>
-                <input type="text" />
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
               </div>
             </div>
 
@@ -221,7 +225,9 @@ const ProposalEditorComponent = () => {
                 <div className={styles.label}>Start Date</div>
 
                 <div className={styles.input}>
-                  <input type="date" />
+                  <input type="date" value={startDate} onChange={(e) => {
+                    setStartDate(e.target.value)
+                  }} />
                 </div>
               </div>
 
@@ -229,7 +235,9 @@ const ProposalEditorComponent = () => {
                 <div className={styles.label}>End Date</div>
 
                 <div className={styles.input}>
-                  <input type="date" />
+                  <input type="date" value={endDate} onChange={(e) => {
+                    setEndDate(e.target.value)
+                  }} />
                 </div>
               </div>
             </div>
@@ -241,31 +249,40 @@ const ProposalEditorComponent = () => {
                 <div className={styles.input}>
                   <input
                     type="number"
-                    placeholder="Min: 0 XDC Max: 100000 XDC"
+                    alt="Min: 0 XDC Max: 100000 XDC"
+                    value={toll}
+                    onChange={(e) => {
+                      let votingToll = e.target.value
+                      if (parseInt(votingToll) < 0) return;
+                      setToll(parseInt(votingToll))
+                    }}
                   />
                 </div>
               </div>
 
               <div className={styles.sliderInput}>
-                <div className={styles.label}>Minimum Pass Vote</div>
+                <div className={styles.label}>Approval Threshold</div>
 
                 <div className={styles.input}>
                   <Slider
                     aria-label="Voting Toll"
-                    defaultValue={10}
+                    defaultValue={approvalThreshold}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={10}
                     marks
                     min={0}
                     max={100}
+                    onChange={(e, value: any) => {
+                      setApprovalThreshold(value.valueOf())
+                    }}
                   />
                 </div>
               </div>
             </div>
 
             <div className={styles.sliderInput}>
-              <div className={styles.label}>Approval Threshold</div>
+
 
               <div
                 className={styles.input}

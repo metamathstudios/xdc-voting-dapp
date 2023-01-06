@@ -1,10 +1,14 @@
+/* eslint-disable react/no-children-prop */
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { ExplorerUrl } from "../../blockchain/constants";
 import { ProposalsContext } from "../../contexts/ProposalsContext";
 import { Theme, ThemeContext } from "../../contexts/ThemeContext";
 import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
+import { BlockchainContext } from "../../contexts/BlockchainProvider";
+import { StatusContext } from "../../contexts/StatusUpdater";
+import { PreviewContext } from "../../contexts/PreviewContext";
 import { default as back } from "../../public/assets/svgicons/backArrow.svg";
 import edit from "../../public/assets/svgicons/edit.svg";
 import publish from "../../public/assets/svgicons/publish.svg";
@@ -12,12 +16,18 @@ import share from "../../public/assets/svgicons/share.svg";
 import { ellipseAddress } from "../../utils";
 import Button from "../reusable/Button";
 import Status, { StatusType } from "../reusable/Status";
+import { VotingHubAddress } from "../../blockchain/constants";
 import Contract from "./components/Contract";
 import Results from "./components/Results";
 import VoteCard from "./components/VoteCard";
 import VotersList from "./components/VotersList";
 import styles from "./styles.module.scss";
 import { NotificationManager } from "react-notifications";
+import ReactMarkdown from "react-markdown";
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import 'katex/dist/katex.min.css' // `rehype-katex` does not import the CSS for you
 
 interface Votes {
   yes: number;
@@ -29,21 +39,26 @@ const ProposalComponent = () => {
   const route = useRouter();
 
   const { theme } = useContext(ThemeContext);
+  const { value, title, startDate, endDate, tags } = useContext(PreviewContext);
 
   const [data, setData] = useState<any>({});
   const [status, setStatus] = useState<StatusType>(StatusType.ACTIVE);
   const [votes, setVotes] = useState<Votes>({
-    yes: 14,
-    no: 9,
-    abstain: 10,
+    yes: 0,
+    no: 0,
+    abstain: 0,
   });
-  const [postedOn, setPostedOn] = useState<string>("");
-  const [closingTime, setClosingTime] = useState<number>(0);
-
+  const [ postedOn, setPostedOn ] = useState<string>("");
   const { current, byId } = useContext(ProposalsContext);
-  const { chainId } = useContext(Web3ModalContext);
+
+  const { votingHub } = useContext(BlockchainContext);
+  const { statusUpdated, setStatusUpdated } = useContext(StatusContext);
+  const { account, chainId } = useContext(Web3ModalContext);
+  const [ receipt, setReceipt ] = useState<any>([]);
+  const [ inChainData, setInChainData ] = useState<any>([]);
 
   const id = parseInt(route.asPath.split("/")[2]);
+  const isPreview = route.pathname === "/preview";
 
   useEffect(() => {
     if (id && current?.proposal !== id) {
@@ -52,8 +67,41 @@ const ProposalComponent = () => {
       };
       getData();
     }
+    if (isPreview && account && chainId) {
+      setData({
+        created: Date.now() / 1000,
+        opens: Math.floor(new Date(startDate).getSeconds()),
+        closes: Math.floor(new Date(endDate).getSeconds()),
+        creator: account,
+        title: title,
+        tags: tags,
+        description: value,
+        contract: VotingHubAddress.Networks[chainId],
+      })
+      return
+    }
     setData(current);
   }, [id, current]);
+
+  useEffect(() => {
+    if (!account) return;
+    if (receipt.length === 0 && id.toString() !== 'NaN') {
+      votingHub?.votingReceipt(id, account).then(
+        (receipts) => {
+          setReceipt(receipts);
+          votingHub?.getProposal(id).then(
+            (res) => {
+              setInChainData(res)
+            }
+          ).catch((err) => {
+            console.log(err);
+          });
+          setStatusUpdated(!statusUpdated);
+        }).catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [statusUpdated, id, account]);
 
   useEffect(() => {
     var months = [
@@ -75,13 +123,12 @@ const ProposalComponent = () => {
 
     setPostedOn(
       date.getDate() +
-        " - " +
-        months[date.getMonth()] +
-        " " +
-        date.getFullYear()
+      " - " +
+      months[date.getMonth()] +
+      " " +
+      date.getFullYear()
     );
 
-    setClosingTime(parseInt(data.closes) * 1000);
   }, [data]);
 
   useEffect(() => {
@@ -161,22 +208,45 @@ const ProposalComponent = () => {
                 </div>
 
                 <div className={styles.infos}>
-                  <div className={styles.text}>{data.description}</div>
+                  <div className={styles.text}>
+                    <ReactMarkdown
+                      components={{
+                        code({ node, inline, className, children, ...props }) {
+                          const match = /language-(\w+)/.exec(className || '')
+                          return !inline && match ? (
+                            <SyntaxHighlighter
+                              children={String(children).replace(/\n$/, '')}
+                              language={match[1]}
+                              PreTag="div"
+                              {...props}
+                            />
+                          ) : (
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          )
+                        }
+                      }}
+                      remarkPlugins={[remarkMath]}
+                      rehypePlugins={[rehypeKatex]}
+                    >
+                      {data.description}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               </div>
 
               <div className={styles.sides}>
-                <VoteCard />
-                <Results votes={votes} />
-                <VotersList />
+                <VoteCard voterChoice={receipt.voterChoice} hasVoted={receipt.hasVoted} data={inChainData} />
+                <Results data={inChainData} />
+                <VotersList id={id}/>
                 <Contract
                   contractAddress={data.contract}
-                  link={`${
-                    ExplorerUrl.Networks[chainId ? chainId : 50]
-                  }xdc${String(data.contract).slice(
-                    2,
-                    String(data.contract).length
-                  )}`}
+                  link={`${ExplorerUrl.Networks[chainId ? chainId : 50]
+                    }xdc${String(data.contract).slice(
+                      2,
+                      String(data.contract).length
+                    )}`}
                 />
               </div>
             </div>

@@ -1,16 +1,35 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Theme, ThemeContext } from "../../../../contexts/ThemeContext";
 import UserRow from "./components/UserRow";
 import VotersPopup from "./components/VotersPopup";
 import styles from "./styles.module.scss";
+import { Web3ModalContext } from "../../../../contexts/Web3ModalProvider";
+import { StatusContext } from "../../../../contexts/StatusUpdater";
+import { VotingHubAddress, DeploymentBlock } from "../../../../blockchain/constants";
+import { RpcEndpoint } from "../../../../blockchain/constants";
+import { fetchVotes } from "../../../../utils";
 
-let usersTotal = 70;
-
-const VotersList = () => {
+const VotersList = (id : any) => {
+  const { account, chainId } = useContext(Web3ModalContext);
+  const { statusUpdated, setStatusUpdated } = useContext(StatusContext);
   const { theme } = useContext(ThemeContext);
-
   const [active, setActive] = useState(false);
   const [offset, setOffset] = useState(0);
+  const [users, setUsers] = useState<any>([]);
+
+  useEffect(() => {
+    if (!chainId || !account) return;
+    setStatusUpdated(!statusUpdated);
+  }, [chainId, account])
+
+  useEffect(() => {
+    if (!chainId || !account) return;
+    try {
+      fetchVotes(id.id, VotingHubAddress.Networks[chainId], RpcEndpoint.Networks[chainId], DeploymentBlock.Networks[chainId]).then(setUsers)
+    } catch (e) {
+      console.log(e)
+    }
+  }, [statusUpdated])
 
   return (
     <div className={theme == Theme.DARK ? styles.dark : styles.light}>
@@ -18,17 +37,13 @@ const VotersList = () => {
         <div className={styles.votersContainer}>
           <div className={styles.label}>Voters</div>
 
-          <div className={styles.totalVotes}>{30} Votes</div>
+          <div className={styles.totalVotes}>{users?.length} Votes</div>
         </div>
 
         <div className={styles.userListContainer}>
-          <UserRow date="03 hours" name="thaurinos.eth" />
-          <UserRow date="05 hours" name="jaumzin.xdc" />
-          <UserRow date="08 hours" name="commeta.xdc" />
-          <UserRow date="12 hours" name="koroshy.xdc" />
-          <UserRow date="15 hours" name="alienstorm.xdc" />
-          <UserRow date="18 hours" name="igorjcqs.xdc" />
-          <UserRow date="22 hours" name="joker.xdc" />
+          {users?.slice(0, 7).map((user, index) => {
+            return <UserRow key={user} date={users[index].voterChoice ? "No" : "Yes"} name={`${users[index].voter.slice(0 , 25)}...`} />
+          })}
         </div>
 
         <div className={styles.line} />
@@ -44,11 +59,12 @@ const VotersList = () => {
       {active && (
         <VotersPopup
           limit={12}
-          total={usersTotal}
+          total={users.length}
           offset={offset}
           setOffset={setOffset}
           activePopup={active}
           setActivePopup={setActive}
+          users={users}
         />
       )}
     </div>
