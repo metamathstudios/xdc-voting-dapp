@@ -8,7 +8,7 @@ export type Option = "YES" | "NO" | "ABSTAIN"
 export type Proposal = {
     title: string
     proposal: number
-    tags: Tag[]
+    tags: string[]
     description: string
     contract: string
     creator: string

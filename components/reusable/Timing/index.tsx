@@ -16,8 +16,9 @@ const Timing = (props: Status) => {
 
   useEffect(() => {
     setInterval(() => {
-      const time = toHHMMSS(props.closes - (Date.now() / 1000))
-      if( time !== undefined && time !== `NaN:NaN:NaN`)
+      if(props.closes - Number((Date.now() / 1000).toFixed()) <= 0) return;
+      const time = toHHMMSS(props.closes - Number((Date.now() / 1000).toFixed()))
+      if( time && time !== `NaN:NaN:NaN`)
       setTime(time);
     }, 1000);
   }, [time]);

@@ -13,9 +13,8 @@ export function toHHMMSS(secs) {
   var hours = Math.floor(sec_num / 3600);
   var minutes = Math.floor(sec_num / 60) % 60;
   var seconds = sec_num % 60;
-
   var time = [hours, minutes, seconds].map((v) => (v < 10 ? "0" + v : v)).join(":");
-  if (time.length > 8) return
+  if (time.length > 10) return
   return time
 }
 

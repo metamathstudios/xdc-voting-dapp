@@ -59,7 +59,7 @@ const VotersList = (id : any) => {
       {active && (
         <VotersPopup
           limit={12}
-          total={users.length}
+          total={users?.length}
           offset={offset}
           setOffset={setOffset}
           activePopup={active}

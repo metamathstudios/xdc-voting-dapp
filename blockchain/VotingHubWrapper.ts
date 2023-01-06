@@ -67,9 +67,36 @@ export default class VotingHubWrapper {
         }
     }
 
+    async proposalCount() {
+        try{
+            const result = await this.Contract.call("proposalCount");
+            return result;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async tollBurnPercentage() {
+        try{
+            const result = await this.Contract.call("TOLL_BURN_RATE");
+            return result;
+        } catch (e) {
+            throw e;
+        }
+    }
+
     async getProposal(proposalId) {
         try{
             const result = await this.Contract.call("proposals", proposalId);
+            return result;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async propose(description, opensAt, closesAt, votingToll, passingPerc, uniqueHash) {
+        try{
+            const result = await this.Contract.send("propose", {from: this.account}, description, opensAt, closesAt, votingToll, passingPerc, uniqueHash);
             return result;
         } catch (e) {
             throw e;

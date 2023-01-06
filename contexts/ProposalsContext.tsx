@@ -23,7 +23,9 @@ const ProposalsProvider = ({ children }) => {
         setLoading(true);
         await getAllProposals().then(
             (result) => {
-                setProposals(result?.data.reverse());
+                // order descending by data.proposal
+                result?.data.sort((a, b) => b.proposal - a.proposal);
+                setProposals(result?.data);
             }
         ).catch(
             (error) => {
@@ -37,6 +39,7 @@ const ProposalsProvider = ({ children }) => {
         setLoading(true);
         await fullTextSearch(query).then(
             (result) => {
+                result?.data.sort((a, b) => b.proposal - a.proposal);
                 setProposals(result?.data);
             }
         ).catch(
@@ -65,6 +68,7 @@ const ProposalsProvider = ({ children }) => {
         setLoading(true);
         await getProposalsByTag(tag).then(
             (result) => {
+                result?.data.sort((a, b) => b.proposal - a.proposal);
                 setProposals(result?.data);
             }
         ).catch(

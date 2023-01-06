@@ -17,9 +17,16 @@ const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 import { useRouter } from "next/router";
 import { Theme, ThemeContext } from "../../contexts/ThemeContext";
 import { PreviewContext } from "../../contexts/PreviewContext";
+import { Web3ModalContext } from "../../contexts/Web3ModalProvider";
+import { BlockchainContext } from "../../contexts/BlockchainProvider";
+import { generateHexString } from "../../utils";
+import { createProposal } from "../../services/api";
+import { VotingHubAddress } from "../../blockchain/constants";
+import type { Proposal, Option } from "../../services/api";
 import Button from "../reusable/Button";
 import back from "./assets/back.svg";
 import less from "./assets/less.svg";
+import rotatingArrow from "./assets/rotatingarrow.svg";
 import more from "./assets/more.svg";
 import preview from "./assets/preview.svg";
 import publish from "./assets/publish.svg";
@@ -28,7 +35,9 @@ const ProposalEditorComponent = () => {
   const { theme } = useContext(ThemeContext);
 
   const router = useRouter();
-  const { value, setValue, title, setTitle, startDate, setStartDate, endDate, setEndDate, toll, setToll, approvalThreshold, setApprovalThreshold, setTags } = useContext(PreviewContext);
+  const { value, setValue, title, setTitle, startDate, setStartDate, endDate, setEndDate, toll, setToll, approvalThreshold, setApprovalThreshold, tags, setTags } = useContext(PreviewContext);
+  const { account, chainId } = useContext(Web3ModalContext);
+  const { votingHub } = useContext(BlockchainContext);
 
   const [renderNumberLink, setRenderNumberLink] = useState(0);
   const [renderNumberImage, setRenderNumberImage] = useState(0);
@@ -37,6 +46,9 @@ const ProposalEditorComponent = () => {
   const [core, setCore] = useState(false);
   const [xdc, setXdc] = useState(true);
   const [urgent, setUrgent] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState("Publishing... Please Wait");
+  const [uniquehash, setUniqueHash] = useState("0x0");
+  const [publishing, setPublishing] = useState(false);
 
   const handleRenderNumberLink = () => {
     setRenderNumberLink((current) => current + 1);
@@ -57,6 +69,12 @@ const ProposalEditorComponent = () => {
   const valuetext = (value: number) => {
     return `${value}`;
   };
+
+  useEffect(() => {
+    if (uniquehash === "0x0") {
+      setUniqueHash(`0x${generateHexString(32)}`);
+    }
+  }, [uniquehash]);
 
   useEffect(() => {
     if (core && treasury && xdc && urgent) {
@@ -91,13 +109,94 @@ const ProposalEditorComponent = () => {
                 <Button icon={preview} text="Preview" />
               </div>
 
-              <div onClick={() => NotificationManager.error("Beta Test Notification: This feature is not available yet!")}>
+              <div onClick={() => {
+                if(!account || !chainId) {
+                  NotificationManager.error("Please connect your wallet to publish a proposal");
+                  return
+                } else if (!title) {
+                  NotificationManager.error("Please add a title to your proposal");
+                  return
+                } else if (!value) {
+                  NotificationManager.error("Please add a description to your proposal");
+                  return
+                } else if (startDate === "dd/mm/yyyy") {
+                  NotificationManager.error("Please add a start date to your proposal");
+                  return
+                } else if (endDate === "dd/mm/yyyy") {
+                  NotificationManager.error("Please add an end date to your proposal");
+                  return
+                } else if (approvalThreshold === 0) {
+                  NotificationManager.error("Your approval threshold cannot be 0%");
+                  return
+                } else if (tags?.length === 0) {
+                  NotificationManager.error("Please add at least one tag to your proposal");
+                  return
+                } else if (Date.parse(startDate) + 86400000 > (Date.parse(endDate))) {
+                  NotificationManager.error(`Your proposal must end at least 1 day after it starts`);
+                  return
+                }
+                setPublishing(true)
+                
+                if (uniquehash !== "0x0") {
+                votingHub?.propose(value, (Date.parse(startDate)/1000), (Date.parse(endDate)/1000), toll, approvalThreshold, generateHexString(32))
+                .then((tx: any) => {
+                  setCurrentMessage("Proposal is being listed to XDC Voting dApp. Please wait...")
+                  try {
+                    votingHub?.proposalCount().then((count: any) => {
+                      let nextProposal = Number(count);
+                      votingHub?.tollBurnPercentage().then((burn: any) => {
+                        createProposal({
+                          title: title,
+                          proposal: nextProposal,
+                          tags: tags,
+                          description: value,
+                          contract: VotingHubAddress.Networks[chainId],
+                          creator: account,
+                          created: (Date.now()/1000).toString(),
+                          opens: (Date.parse(startDate)/1000).toString(),
+                          closes: (Date.parse(endDate)/1000).toString(),
+                          toll: toll,
+                          urls: [],
+                          files: [],
+                          options: ["YES", "NO", "ABSTAIN"],
+                          burnPercentage: Number(burn),
+                          burnAddress: "xdc0000000000000000000000000000000000000000",
+                          communityPercentage: 100 - Number(burn),
+                          communityAddress: "xdc0000000000000000000000000000000000000000",
+                          uniqueHash: uniquehash,
+                        }).then((res: any) => {
+                          if(res.status === 201) {
+                            setCurrentMessage("Proposal successfully published. Please wait...")
+                            setTimeout(() => {
+                              router.push("/")
+                            }, 1000)
+                          }
+                      })
+                    })
+                  })
+                  } catch (err) {
+                    setCurrentMessage("Failed to list proposal. Please try again." + err)
+                  }
+                })
+                .catch((err: any) => {
+                  setCurrentMessage("Failed to publish proposal to the Blockchain. Please try again.")
+                  setTimeout(() => {
+                    router.push("/")
+                  }, 1000)
+                })
+                } else {
+                  setCurrentMessage("Failed to generate unique hash. Please try again.")
+                  setTimeout(() => {
+                    router.push("/")
+                  }, 1000)
+                }
+              }}>
                 <Button icon={publish} text="Publish" />
               </div>
             </div>
           </div>
 
-          <div className={styles.inputsContainer}>
+          {!publishing ? (<div className={styles.inputsContainer}>
             <div className={styles.textInput}>
               <div className={styles.label}>Title</div>
 
@@ -305,15 +404,27 @@ const ProposalEditorComponent = () => {
                 />
               ))}
 
-              <ImageInput handleRenderNumber={handleRenderNumberImage} />
+              {/* <ImageInput handleRenderNumber={handleRenderNumberImage} />
               {Array.from({ length: renderNumberImage }).map((_, i) => (
                 <ImageInputRemovable
                   key={i}
                   handleRenderNumber={handleRemoveNumberImage}
                 />
-              ))}
+              ))} */}
             </div>
           </div>
+          ) : (
+          <div className={styles.inputsContainer}>
+            <div className={styles.bottomInputs}>
+              <div className={styles.loader}>
+                <Image src={rotatingArrow} alt="Publishing" />
+              </div>
+              <span className={styles.label}>
+                {currentMessage}
+              </span>
+            </div>
+          </div>
+          )}
         </div>
       </div>
     </div>

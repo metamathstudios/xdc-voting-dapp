@@ -52,11 +52,11 @@ const VotersPopup = ({
             <div className={styles.votersContainer}>
               <span>Voters</span>
 
-              <div>{users.length} Votes</div>
+              <div>{users?.length} Votes</div>
             </div>
 
             <div className={styles.dataContainer}>
-              {users.map((user, index) => {
+              {users?.map((user, index) => {
                 return <UserRow key={user} date={users[index].voterChoice ? "No" : "Yes"} name={`${users[index].voter}`} />
               })}
               {/* <UserRow date="08 hours" name="jaumdarkz.xdc" />

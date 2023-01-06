@@ -53,9 +53,10 @@ const ProposalComponent = () => {
 
   const { votingHub } = useContext(BlockchainContext);
   const { statusUpdated, setStatusUpdated } = useContext(StatusContext);
-  const { account, chainId } = useContext(Web3ModalContext);
+  const { account, chainId, web3 } = useContext(Web3ModalContext);
   const [ receipt, setReceipt ] = useState<any>([]);
   const [ inChainData, setInChainData ] = useState<any>([]);
+  const  [passingPercentage, setPassingPercentage ] = useState<number>(0);
 
   const id = parseInt(route.asPath.split("/")[2]);
   const isPreview = route.pathname === "/preview";
@@ -65,7 +66,7 @@ const ProposalComponent = () => {
       const getData = async () => {
         await byId(id);
       };
-      getData();
+      getData().then();
     }
     if (isPreview && account && chainId) {
       setData({
@@ -80,7 +81,11 @@ const ProposalComponent = () => {
       })
       return
     }
-    setData(current);
+
+    if(id && current?.proposal === id){
+      setData(current);
+    }
+    // setData(current);
   }, [id, current]);
 
   useEffect(() => {
@@ -119,7 +124,7 @@ const ProposalComponent = () => {
       "December",
     ];
 
-    const date = new Date(data.created * 1000);
+    const date = new Date(data?.created * 1000);
 
     setPostedOn(
       date.getDate() +
@@ -132,12 +137,21 @@ const ProposalComponent = () => {
   }, [data]);
 
   useEffect(() => {
-    if (Date.now() / 1000 > data.opens && Date.now() / 1000 < data.closes) {
+
+    if (!web3 || !account) return;
+    votingHub?.getProposal(data.proposal).then((res) => {
+      if (!res) return;
+      setPassingPercentage(
+        parseInt(res[6])/100
+      );
+    });
+
+    if ((Date.now() / 1000) > Number(data.opens) && (Date.now() / 1000) < Number(data.closes)) {
       setStatus(StatusType.ACTIVE);
-    } else if (Date.now() / 1000 > data.closes) {
-      if (votes.yes > (votes.yes + votes.no + votes.abstain) / 2) {
+    } else if ((Date.now() / 1000) > Number(data.closes)) {
+      if (votes.yes / ( votes.yes + votes.no ) >= passingPercentage) {
         setStatus(StatusType.PASSED);
-      } else if (votes.yes < (votes.yes + votes.no + votes.abstain) / 2) {
+      } else if (votes.yes / ( votes.yes + votes.no ) < passingPercentage) {
         setStatus(StatusType.FAILED);
       }
     }
@@ -176,23 +190,23 @@ const ProposalComponent = () => {
                   <div className={styles.left}>
                     <div className={styles.icon} />
                     <div className={styles.walletId}>
-                      {ellipseAddress(data.creator)}
+                      {ellipseAddress(data?.creator)}
                     </div>
                     <div className={styles.postDate}>Posted on {postedOn}</div>
                   </div>
 
-                  <div className={styles.title}>{data.title}</div>
+                  <div className={styles.title}>{data?.title}</div>
 
                   <div className={styles.footer}>
                     <div className={styles.left}>
                       <Status status={status} />
 
                       <div className={styles.tagList}>
-                        {data.tags &&
-                          data.tags.slice(0, 4).map((value, index) => {
+                        {data?.tags &&
+                          data?.tags.slice(0, 4).map((value, index) => {
                             return (
                               <div className={styles.tag} key={index}>
-                                {data.tags[index]}
+                                {data?.tags[index]}
                               </div>
                             );
                           })}
@@ -230,7 +244,7 @@ const ProposalComponent = () => {
                       remarkPlugins={[remarkMath]}
                       rehypePlugins={[rehypeKatex]}
                     >
-                      {data.description}
+                      {data?.description}
                     </ReactMarkdown>
                   </div>
                 </div>
@@ -241,11 +255,11 @@ const ProposalComponent = () => {
                 <Results data={inChainData} />
                 <VotersList id={id}/>
                 <Contract
-                  contractAddress={data.contract}
+                  contractAddress={data?.contract}
                   link={`${ExplorerUrl.Networks[chainId ? chainId : 50]
-                    }xdc${String(data.contract).slice(
+                    }xdc${String(data?.contract).slice(
                       2,
-                      String(data.contract).length
+                      String(data?.contract).length
                     )}`}
                 />
               </div>

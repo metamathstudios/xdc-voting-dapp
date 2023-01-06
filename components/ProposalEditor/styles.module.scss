@@ -129,6 +129,31 @@
           }
         }
       }
+
+      .loader {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(90deg, var(--purple) 0%, var(--blue) 100%);
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        img {
+          width: 25px;
+          animation: animate 1s linear infinite;
+    
+          @keyframes animate {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        }
+      }
+
     }
   }
 }
@@ -434,7 +459,33 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        align-items: center;
+      }
+    }
+    .loader {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(90deg, var(--purple) 0%, var(--blue) 100%);
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      img {
+        width: 25px;
+        animation: animate 1s linear infinite;
+  
+        @keyframes animate {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(-360deg);
+          }
+        }
       }
     }
   }
+
+  
 }

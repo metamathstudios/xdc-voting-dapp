@@ -77,9 +77,9 @@ const Card: React.FC<CardType> = (props: CardType) => {
       );
     });
 
-    if (Date.now() / 1000 > props.data.opens && Date.now() / 1000 < props.data.closes) {
+    if ((Date.now() / 1000) > Number(props.data.opens) && (Date.now() / 1000) < Number(props.data.closes)) {
       setStatus(StatusType.ACTIVE);
-    } else if (Date.now() / 1000 > props.data.closes) {
+    } else if ((Date.now() / 1000) > Number(props.data.closes)) {
       if (votes.yes / ( votes.yes + votes.no ) >= passingPercentage) {
         setStatus(StatusType.PASSED);
       } else if (votes.yes / ( votes.yes + votes.no ) < passingPercentage) {
@@ -104,12 +104,12 @@ const Card: React.FC<CardType> = (props: CardType) => {
       setVoted(res[0])
     });
 
-    if (Date.now() / 1000 > props.data.opens && Date.now() / 1000 < props.data.closes) {
+    if ((Date.now() / 1000) > Number(props.data.opens) && (Date.now() / 1000) < Number(props.data.closes)) {
       setStatus(StatusType.ACTIVE);
-    } else if (Date.now() / 1000 > props.data.closes) {
-      if (votes.yes > votes.yes + votes.no + votes.abstain / 2) {
+    } else if ((Date.now() / 1000) > Number(props.data.closes)) {
+      if (votes.yes / ( votes.yes + votes.no ) >= passingPercentage) {
         setStatus(StatusType.PASSED);
-      } else if (votes.yes < votes.yes + votes.no + votes.abstain / 2) {
+      } else if (votes.yes / ( votes.yes + votes.no ) < passingPercentage) {
         setStatus(StatusType.FAILED);
       }
     }
@@ -129,7 +129,7 @@ const Card: React.FC<CardType> = (props: CardType) => {
             </div>
           </div>
           <div className={styles.right}>
-            <Timing closes={props.data.closes} />
+            <Timing closes={Number(props.data.closes)} />
           </div>
         </div>
 
