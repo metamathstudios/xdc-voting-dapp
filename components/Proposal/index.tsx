@@ -162,6 +162,7 @@ const ProposalComponent = () => {
       <div className={styles.container}>
         <div className={styles.centerColumn}>
           <div className={styles.userOptions}>
+            {!isPreview ? (
             <div
               className={styles.backContainer}
               onClick={() => route.push("/")}
@@ -169,6 +170,15 @@ const ProposalComponent = () => {
               <Image src={back} alt="Back" width={17} />
               <div className={styles.text}>Back</div>
             </div>
+            ) : (
+            <div
+              className={styles.backContainer}
+              onClick={() => route.push("/editor")}
+            >
+              <Image src={back} alt="Back" width={17} />
+              <div className={styles.text}>Back</div>
+            </div>
+            )}            
             {route.pathname === "/preview" ? (
               <div className={styles.rightContainer}>
                 <div onClick={() => route.push("/editor")}>

@@ -56,7 +56,7 @@ const VotersPopup = ({
             </div>
 
             <div className={styles.dataContainer}>
-              {users?.map((user, index) => {
+              {users?.slice(0, 12).map((user, index) => {
                 return <UserRow key={user} date={users[index].voterChoice ? "No" : "Yes"} name={`${users[index].voter}`} />
               })}
               {/* <UserRow date="08 hours" name="jaumdarkz.xdc" />

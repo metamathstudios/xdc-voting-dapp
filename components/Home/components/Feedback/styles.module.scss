@@ -1,0 +1,45 @@
+.dark {
+  width: 100%;
+  max-width: 320px;
+
+  .container {
+    border-color: rgba(45, 45, 45, 1);
+  }
+}
+
+.light {
+  width: 100%;
+  max-width: 320px;
+}
+
+.container {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  border: 1px solid var(--lightline);
+  border-radius: 10px;
+  margin-top: 30px;
+  padding: 18px 20px;
+
+  .left {
+    span {
+      font-size: 15px;
+      color: rgba(72, 72, 72, 1);
+    }
+  }
+
+  .right {
+    cursor: pointer;
+    span {
+      font-size: 15px;
+      color: rgba(188, 188, 188, 1);
+    }
+
+    img {
+      margin-left: 6px;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Theme, ThemeContext } from "../../contexts/ThemeContext";
 import About from "./components/About";
+import Feedback from "./components/Feedback";
 import List from "./components/List";
 import Search from "./components/Search";
 import styles from "./styles.module.scss";
@@ -20,6 +21,7 @@ const HomeComponent = () => {
 
             <div className={styles.right}>
               <About />
+              <Feedback />
             </div>
           </div>
         </div>

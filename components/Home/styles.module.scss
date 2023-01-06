@@ -33,8 +33,9 @@
       .right {
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        width: 350px;
+        justify-items: center;
+        gap: 0px;
+        width: 320px;
       }
     }
   }
