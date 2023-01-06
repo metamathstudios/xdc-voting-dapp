@@ -9,7 +9,7 @@ const Feedback = () => {
 
   return (
     <div className={theme == Theme.DARK ? styles.dark : styles.light}>
-      <div className={styles.container} onClick={() => window.open("https://www.google.com/")}>
+      <div className={styles.container} onClick={() => window.open("https://forms.gle/4jMP1yPzCmQdZdxU7")}>
         <div className={styles.left}>
           <span>Give Your Feedback</span>
         </div>
